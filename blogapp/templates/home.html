@@ -44,7 +44,7 @@
 
                         <div class="card my-4 md:my-2 flex-col flex basis-[48%] py-8">
 
-                            <img class="h-auto max-w-[420px]" src="{{ post.blog_image.url }}" alt="featured image" />
+                            <img class="h-auto w-full" src="{{ post.blog_image.url }}" alt="featured image" />
                             <div class="card-body">
                                 <div class="flex flex-col italic text-gray-400 mt-4">
                                     <span>{{post.created_at}}</span>
@@ -69,7 +69,7 @@
 
                         {% for recent_post in posts %}
 
-                            <div class="card rounded-md border-[1px] border-green-700 basis-[30%] md:mb-0 mb-8">
+                            <div class="card rounded-md border-[1px] border-green-700 md:mb-0 mb-8">
 
                                 <div class="card-body p-4">
                                     <div class="flex justify-between items-center mb-4 italic text-gray-400">
