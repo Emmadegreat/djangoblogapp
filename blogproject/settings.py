@@ -17,7 +17,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'gistblog.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https//gistblog.up.railway.app']
 
 
 # Application definition
@@ -91,6 +92,12 @@ DATABASES = {
         "PORT": os.environ.get('DATABASE_PORT'),
     }
 }
+
+
+# POSTGRES_LOCALLY = True
+# if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
+#     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
+
 
 
 # Password validation
