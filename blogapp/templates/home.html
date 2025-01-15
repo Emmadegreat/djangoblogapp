@@ -42,15 +42,15 @@
                     <div class="md:flex-row flex-col flex items-center justify-between">
                         {% for post in featured_post %}
 
-                        <div class="card my-4 md:my-2 md:flex-row flex-col flex basis-[48%] items-center py-8">
+                        <div class="card my-4 md:my-2 flex-col flex basis-[48%] py-8">
 
-                            <img class="h-auto max-w-[320px]" src="{{ post.blog_image.url }}" alt="featured image" />
-                            <div class="card-body ml-4">
-                                <div class="flex flex-col italic text-gray-400">
+                            <img class="h-auto max-w-[420px]" src="{{ post.blog_image.url }}" alt="featured image" />
+                            <div class="card-body">
+                                <div class="flex flex-col italic text-gray-400 mt-4">
                                     <span>{{post.created_at}}</span>
                                     <span class="text-[16px] italic"> Author:  {{post.author.first_name}}</span>
                                 </div>
-                                <h2 class="card-title text-green-700 font-medium mt-4 text-[20px] py-2">{{post.title}}</h2>
+                                <h2 class="card-title text-green-700 font-medium mt-2 text-[20px] py-2">{{post.title}}</h2>
                                 <p class="text-[18px] leading-6 mb-6">{{post.short_description | truncatewords:20}}</p>
                                 <a class="py-2 px-3 rounded-md border-[1px] border-green-700" href="{% url 'single_blog' slug=post.slug %}">Read more →</a>
                             </div>
