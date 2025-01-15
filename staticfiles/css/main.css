@@ -729,6 +729,18 @@ video {
   margin-top: 80px;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mb-\[32px\] {
+  margin-bottom: 32px;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -823,6 +835,10 @@ video {
 
 .max-w-\[500px\] {
   max-width: 500px;
+}
+
+.max-w-\[420px\] {
+  max-width: 420px;
 }
 
 .flex-grow {
@@ -1144,6 +1160,10 @@ video {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .text-left {
