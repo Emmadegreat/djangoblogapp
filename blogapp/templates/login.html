@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>Login Gisblog</title>{% endblock title %}
+
+{% block content %}
+
+    <section class="mt-[24px]">
+
+        {% if messages %}
+
+            {% for message in messages %}
+                <div class="text-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-700 text-white
+                   {% elif message.tags == 'danger' %} bg-red-400 text-white {% elif message.tags == 'warning' %} bg-yellow-400 text-black
+                    {% elif message.tags == 'info' %} bg-blue-400 text-black {% else %} bg-gray-400 text-black {% endif %}"
+                    id="message-{{ forloop.counter }}">
+                    {{ message }}
+
+                    <button
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[24px] font-700 text-gray-200 hover:text-gray-900"
+                            onclick="closeMessage('message-{{ forloop.counter }}')">
+                        &times;
+                    </button>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+        <div class="rounded flex flex-col  mt-[40px] gap-4 border-green-700 border-[1px] max-w-[500px] m-auto">
+            <p class="text-center mt-4">Hello!, welcome back</p><hr>
+            <form class="py-4 px-6" method="POST" novalidate>
+                {% csrf_token %}
+
+
+                {% for error in form.non_field_errors %}
+                    <p class="text-red-600">{{ error }}</p>
+                {% endfor %}
+
+
+                <div class="mb-4">
+                    <label for="id_password">Password</label>
+                    <input type="email" class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none"
+                        name="email" placeholder="Email">
+                        {% for error in form.email.errors %}
+                            <p class="text-red-600">{{ error }}</p>
+                        {% endfor %}
+
+                </div>
+                <div class="mb-4">
+                    <label for="id_password">Password</label>
+                    <input type="password" class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none"
+                    name="password" placeholder="Password">
+
+                    {% for error in form.password.errors  %}
+                        <p class="text-red-600">{{ error}}</p>
+                    {% endfor %}
+
+                </div>
+                <a href="" class="ml-[24px] text-green-700 font-normal text-[14px]">Forgot Password?</a>
+
+                <button type="submit" class="rounded bg-green-700 hover:bg-green-800 px-4 h-[40px] text-white w-full">Login</button>
+                <p class="mb-4 my-4 flex justify-start">New to GistBlog? &nbsp; <a href="{% url 'register' %}"
+                    class="text-green-700">Create Account</a>
+                </p>
+            </form>
+        </div>
+    </section>
+
+{% endblock content %}
+
+
+

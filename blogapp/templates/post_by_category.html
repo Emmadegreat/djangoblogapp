@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title> Post Categories - GistBlog </title>{% endblock title %}
+
+{% block content %}
+
+
+
+    <section class="my-4 py-4 container">
+            <h3>Category - {{ category }}</h3>
+        {% comment %} {% for category in category_post %}
+
+            <p>{{ category.title }}</p>
+
+        {% endfor %} {% endcomment %}
+
+                    <div class="row">
+                        <div class="post-wrapper p-6">
+                            <div class="col-lg-6">
+                            <!-- Recnet post-->
+
+                            {% for recent_post in posts %}
+
+                            <div class="card mb-4">
+
+                                <img class="card-img-top" src="{{ recent_post.blog_image.url }}" alt="post image" style="width:100%; height:300px;" />
+                                <div class="card-body">
+                                    <div class="small text-muted">
+                                        {{recent_post.created_at}} {{recent_post.created_at | timesince}}
+                                        <span style="float:right;"> Author:  {{recent_post.author.first_name}}</span>
+                                    </div>
+                                    <h2 class="card-title h4">{{ recent_post.title }}</h2>
+                                    <p class="card-text">{{recent_post.short_description | truncatewords:20}}</p>
+                                    <a class="btn btn-primary" href="{% url 'single_blog' slug=recent_post.slug %}">Read more →</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        </div>
+
+                    </div>
+        </div>
+
+    </section>
+
+
+
+
+{% endblock content %}

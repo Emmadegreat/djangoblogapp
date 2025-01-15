@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>Search_Post - Gisblog</title>{% endblock title %}
+
+{% block content %}
+
+    <section class="pt-12">
+        <h4 class="mt-[40px] font-semibold text-orange-600 leading-5">Search Gisblog</h4>
+
+
+        {% for searched in blogs %}
+
+                            <div class="card rounded-md border-[1px] border-orange-600 basis-[47%] md:mb-0 mb-8">
+                                {% comment %} <img class="card-img-top rounded-md max-h-[360px] w-full" src="{{ recent_post.blog_image.url }}" alt="post image" /> {% endcomment %}
+                                <div class="card-body p-4">
+                                    <div class="flex justify-between items-center mb-4 italic text-gray-400">
+                                        <span>{{searched.created_at}}</span>
+                                        <!--<span>{{recent_post.category}}</span>-->
+                                        <span style="float:right;"> Author:  {{searched.author.first_name}}</span></div>
+                                        <h2 class="card-title text-orange-600 font-medium mt-4 text-[20px] py-1">{{ searched.title }}</h2>
+                                        <p class="card-text text-[18px] leading-6 mb-4">{{searched.short_description | truncatewords:8}}</p>
+                                        <a class="text-orange-600" href="{% url 'single_blog' slug=searched.slug %}">Read more →</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+    </section
+
+{% endblock content %}
+
+
+

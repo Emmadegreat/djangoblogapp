@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>Dashboard - Gisblog</title>{% endblock title %}
+
+{% block content %}
+
+    <section class="sm:px-8 px-6 py-[30px] sm:py-[60px]">
+
+        <h4 class="my-[20px] font-semibold text-green-700 leading-5 text-[32px]">{{ user.first_name }}'s Dashboard</h4>
+        <div class="flex-col md:flex-row flex justify-between">
+            <div class="card basis-[25%] flex flex-col w-full border-[1px] border-green-700 p-4 rounded-md">
+                {% include "./leftside.html" %}
+            </div>
+            <div class="card basis-[33%] mx-4 w-full border-[1px] border-green-700 p-4 rounded-md text-center">
+                <h3 class="font-semibold text-[20px]">All Categories</h3>
+                <p>{{ category_count }}</p>
+            </div>
+            <div class="card basis-[33%] w-full border-[1px] border-green-700 p-4 rounded-md text-center">
+                <h3 class="font-semibold text-[20px]">All Posts</h3>
+                <p>{{ blog_count }}</p>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock content %}

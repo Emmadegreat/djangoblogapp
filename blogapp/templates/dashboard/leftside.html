@@ -1,0 +1,18 @@
+
+{% block content %}
+
+    <div class="flex flex-col">
+        <a href="{% url 'dashboard' %}"class="{% if '/dashboard/' == request.path %}bg-yellow-500 {% endif %}">Dashboard</a>
+        {% if perms.auth.view_users %}
+            <a href="{% url 'users' %}">Users</a>
+        {% endif %}
+
+        <a href="{% url 'categories' %}">Categories</a>
+        <a href="{% url 'posts' %}">Posts</a>
+        <a href="{% url 'contact_us_data' %}">Contact us form data</a>
+
+
+        <a href="{% url 'Logout' %}">Logout</a>
+    </div>
+
+{% endblock content %}

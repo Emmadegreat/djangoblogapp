@@ -1,0 +1,50 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block title %}<title>Contact us Data - Gisblog</title>{% endblock title %}
+
+{% block content %}
+
+<section class="sm:px-8 px-6 py-[30px] sm:py-[60px]">
+
+   <div class="mt-8 p-6 rounded-lg shadow-md">
+
+        <div class="flex justify-between">
+            <a href="{% url 'dashboard' %}" class="text-green-700"> &larr;Back to dashboard</a>
+            <h5 class="text-xl font-semibold">Contact us mails</h5>
+        </div>
+        {% if contact_data %}
+            <table class="table-auto w-full text-left border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-300">
+                        <th class="px-4 py-2 border border-gray-300">Id</th>
+                        <th class="px-4 py-2 border border-gray-300">Full Name</th>
+                        <th class="px-4 py-2 border border-gray-300">Email</th>
+                        <th class="px-4 py-2 border border-gray-300">Phone</th>
+                        <th class="px-4 py-2 border border-gray-300">Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contact_data %}
+                        <tr>
+                            <td class="px-4 py-2 border border-gray-300">{{ forloop.counter }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ contact.fullname }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ contact.email }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ contact.phone }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ contact.message }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-gray-500">No contact details found.</p>
+        {% endif %}
+    </div>
+
+
+</section>
+
+{% endblock content %}
+
+
+
+

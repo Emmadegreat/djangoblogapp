@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load add_class %}
+{% load static %}
+{% block title %}<title>Contact_Us - Gisblog</title>{% endblock title %}
+
+{% block content %}
+<section class="sm:px-8 px-6 py-[30px] sm:py-[60px]">
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="text-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-400 text-white
+                {% elif message.tags == 'danger' %} bg-red-400 text-white {% elif message.tags == 'warning' %} bg-yellow-400 text-black
+                {% elif message.tags == 'info' %} bg-blue-400 text-black {% else %} bg-gray-400 text-black {% endif %}"
+                id="message-{{ forloop.counter }}">
+                    {{ message }}
+
+                <button
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[24px] font-700 text-gray-200 hover:text-gray-900"
+                    onclick="closeMessage('message-{{ forloop.counter }}')">
+                    &times;
+                </button>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+    <h4 class="my-[20px] font-semibold text-green-700 leading-5 text-[32px]">Contact Us</h4>
+    <p class="font-normal text-[16px] text-black">
+        {% lorem 3 b %}
+    </p><br>
+
+    <div class="flex flex-col justify-between mt-16 md:flex-row">
+        <div class="basis-[47%] text-[16px] mr-0 md:mr-8 text-justify mb-16 md:mb-0">
+            <h3 class="mb-3 text-start font-medium text-green-700 text-[28px]">For more inquires you can send us a mail</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                officia deserunt mollit anim id est laborum. Inventore doloremque illo facere
+                explicabo vero
+            </p>
+        </div>
+
+        <div class="w-full flex flex-col basis-[47%]">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="flex flex-col mb-4">
+                    <label for="id_fullname" class="text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    {{ form.fullname|add_class:"form-control px-4 py-2 border rounded-md focus:outline-none focus:border-gray-300"}}
+
+                    {% for error in form.fullname.errors %}
+                        <p class="text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="id_email" class="text-sm font-medium text-gray-700 mb-1">Email</label>
+                    {{ form.email|add_class:"form-control px-4 py-2 border rounded-md focus:outline-none focus:border-gray-300"}}
+
+                    {% for error in form.email.errors %}
+                        <p class="text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="id_phone" class="text-sm font-medium text-gray-700 mb-1">Phone number</label>
+                    {{ form.phone|add_class:"form-control px-4 py-2 border rounded-md focus:outline-none focus:border-gray-300"}}
+
+                    {% for error in form.phone.errors %}
+                        <p class="text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="id_email" class="text-sm font-medium text-gray-700 mb-1">Message</label>
+                    {{ form.message|add_class:"form-control px-4 py-2 border rounded-md focus:outline-none focus:border-gray-300"}}
+
+                    {% for error in form.message.errors %}
+                        <p class="text-red-600">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="w-full rounded-md px-5 py-2 bg-green-700 hover:bg-green-800 text-white mt-4">Send Mail</button>
+            </form>
+        </div>
+    </div>
+
+</section>
+{% endblock content %}

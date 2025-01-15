@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block title %}<title>Categories - Gisblog</title>{% endblock title %}
+
+{% block content %}
+<section class="sm:px-8 px-6 py-[30px] sm:py-[60px] bg-[#fffee7]">
+
+   <div class="flex justify-between items-center">
+        <a href="{% url 'categories' %}"> &larr;Back to categories</a>
+        <h2>Add category</h2>
+   </div>
+
+    <div class="max-w-[400px] m-auto">
+        <form class="" method="POST">
+            {% csrf_token %}
+
+            <div class="mb-2 flex flex-col mt-[80px]">
+                <label for="id_firstname">Category Name</label>
+                <input type="text" id="category_name" name="category_name" class="rounded-md h-[40px] p-4 form-control border-[1px] border-gray-400" placeholder="Enter category name">
+                {% for error in form.category_name.errors %}
+                    <p class="text-red-600">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <button type="submit" class="rounded-md  px-5 py-2 bg-green-700 text-white">Add category</button>
+
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

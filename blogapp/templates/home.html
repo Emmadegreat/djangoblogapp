@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title>Home - Gistblog </title>{% endblock title %}
+
+{% block content %}
+
+        <!-- Page content-->
+
+            <section class="hero h-[100vh]">
+                <img class="w-full h-full object-cover" src="{% static 'images/hero-image.jpg' %}" alt="featured image" />
+
+            </section>
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="text-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-400 text-white
+                        {% elif message.tags == 'danger' %} bg-red-400 text-white {% elif message.tags == 'warning' %} bg-yellow-400 text-black
+                        {% elif message.tags == 'info' %} bg-blue-400 text-black {% else %} bg-gray-400 text-black {% endif %}"
+                        id="message-{{ forloop.counter }}">
+                            {{ message }}
+
+                        <button
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[24px] font-700 text-gray-200 hover:text-gray-900"
+                            onclick="closeMessage('message-{{ forloop.counter }}')">
+                            &times;
+                        </button>
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+            <section class="px-[32px] flex flex-col">
+
+                    <!-- Featured blog post-->
+                    <h3 class="text-[40px] font-semibold text-center pt-8 text-green-700">Featured Post</h3>
+                    <hr>
+
+                    <div class="md:flex-row flex-col flex items-center justify-between">
+                        {% for post in featured_post %}
+
+                        <div class="card my-4 md:my-2 md:flex-row flex-col flex basis-[48%] items-center py-8">
+
+                            <img class="h-auto max-w-[320px]" src="{{ post.blog_image.url }}" alt="featured image" />
+                            <div class="card-body ml-4">
+                                <div class="flex flex-col italic text-gray-400">
+                                    <span>{{post.created_at}}</span>
+                                    <span class="text-[16px] italic"> Author:  {{post.author.first_name}}</span>
+                                </div>
+                                <h2 class="card-title text-green-700 font-medium mt-4 text-[20px] py-2">{{post.title}}</h2>
+                                <p class="text-[18px] leading-6 mb-6">{{post.short_description | truncatewords:20}}</p>
+                                <a class="py-2 px-3 rounded-md border-[1px] border-green-700" href="{% url 'single_blog' slug=post.slug %}">Read more →</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div><hr class="my-0" />
+
+                </section>
+
+            <!-- Recent post-->
+            <section class="px-[32px] flex flex-col mt-8">
+                <h3 class="text-[40px] font-semibold text-center pt-8 text-green-700">Recent Post</h3>
+                    <hr>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
+
+                        {% for recent_post in posts %}
+
+                            <div class="card rounded-md border-[1px] border-green-700 basis-[30%] md:mb-0 mb-8">
+
+                                <div class="card-body p-4">
+                                    <div class="flex justify-between items-center mb-4 italic text-gray-400">
+                                        <span>{{recent_post.created_at}}</span>
+                                        <!--<span>{{recent_post.category}}</span>-->
+                                        <span style="float:right;"> Author:  {{recent_post.author.first_name}}</span></div>
+                                        <h2 class="card-title text-green-700 font-medium mt-4 text-[20px] py-1">{{ recent_post.title }}</h2>
+                                        <p class="text-[16px] leading-6 mb-4">{{recent_post.short_description | truncatewords:8}}</p>
+                                        <a class="text-green-700 text-[14px]" href="{% url 'single_blog' slug=recent_post.slug %}">Read more →</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+            </section>
+
+
+        </div>
+
+{% endblock content %}

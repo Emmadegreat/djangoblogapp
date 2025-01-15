@@ -1,0 +1,26 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block title %}<title>Edit Category - Gisblog</title>{% endblock title %}
+
+{% block content %}
+<section class="sm:px-8 px-6 py-[30px] sm:py-[60px] bg-[#fffee7]">
+
+   <div class="flex justify-between items-center">
+        <a href="{% url 'categories' %}"> &larr;Back to categories</a>
+        <h2>Edit category</h2>
+   </div>
+
+    <div class="max-w-[400px] m-auto">
+        <form class="" method="POST">
+            {% csrf_token %}
+
+            <div class="mb-2 flex flex-col mt-[80px]">
+                {{form.as_p}}
+            </div>
+            <button type="submit" class="rounded-md  px-5 py-2 bg-green-700 text-white">Submit</button>
+
+        </form>
+    </div>
+</section>
+
+{% endblock content %}
