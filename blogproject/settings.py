@@ -17,6 +17,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'gistblog.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://gistblog.up.railway.app']
+PORT = os.getenv('PORT', '8000')
 
 
 # Application definition
