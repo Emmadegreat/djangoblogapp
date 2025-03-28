@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 load_dotenv()
 from pathlib import Path
 from django.contrib.messages import constants as messages
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -172,3 +175,11 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 #media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+#cloudinary configuration
+
+cloudinary.config(
+    cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key = os.environ.get('CLOUDINARY_API_SECRET'),
+    api_secret = os.environ.get('CLOUDINARY_API_SECRET')
+)
