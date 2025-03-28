@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class BlogUserManager(BaseUserManager):
@@ -67,7 +68,7 @@ class Blogs(models.Model):
     slug = models.SlugField(max_length=50, unique=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
-    blog_image = models.ImageField(upload_to='uploads/%y/%m/%d')
+    blog_image = CloudinaryField('Blog_images')
     short_description = models.TextField(max_length=1000)
     blog_body = models.TextField(max_length=3000)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
