@@ -191,8 +191,42 @@ def subscribe(request):
                 else:
                     subscriber.subscribed = True
                     subscriber.save()
+
+                    send_mail( #send notification mail to the subscriber
+                        'subscription successful',
+                        'You have successfully re-subscribed to our newsletter',
+                        settings.DEFAULT_FROM_EMAIL,
+                        [email],
+                        fail_silently=False,
+                    )
+
+                    send_mail( #send notification mail to the admin
+                        'New mail re-subscription',
+                        f"The mail {mail} has re-subscribed to the newsletter",
+                        settings.DEFAULT_FROM_EMAIL,
+                        [settings.ADMIN_EMAIL],
+                        fail_silently=False,
+                    )
+
                     return JsonResponse({'success': True, 'message': "You've successfully re-subscribed!"})
             else:
+
+                send_mail( #send notification mail to the subscriber
+                    "Subscription success",
+                    "Thank you for subscribing to our newsletter",
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,
+                )
+
+                send_mail( #send notification mail to the admin
+                    "New subscription Notice",
+                    f"The user with email {email} has subscribed to our newsletter",
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.ADMIN_EMAIL],
+                    fail_silently=False,
+                )
+
                 return JsonResponse({'success': True, 'message': "You've successfully subscribed!"})
         else:
             return JsonResponse({'success': False, 'error': "Invalid input."}, status=400)
