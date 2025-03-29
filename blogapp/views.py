@@ -81,7 +81,8 @@ def search(request):
     return render(request, "search.html", context)
 
 def register(request):
-    if request.user.is_authenticated:        return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('home')
 
     else:
         form = RegisterForm()
@@ -231,16 +232,16 @@ def unsubscribe(request):
 
 def page_not_found(request, exception):
 
-    return render(request, '404.html', status=404)
+    return render(request, '404.html', status=404) #trying to access a page that is not existing in the website
 
 def server_error(request, exception):
 
-    return render(request, '500.html', status=500)
+    return render(request, '500.html', status=500)# server error like wrong configuration of data/details
 
 def bad_request(request, exception):
 
-    return render(request, '400.html', status=400)
+    return render(request, '400.html', status=400)# trying to make unexpected request or POST/GET method that is not correct
 
-def permission_denied(request, exception):
+def permission_denied(request, exception): #permission like login related error
 
     return render(request, '403.html', status=403)
