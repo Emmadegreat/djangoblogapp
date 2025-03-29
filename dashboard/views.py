@@ -119,7 +119,7 @@ def edit_post(request,pk):
 
     if request.method == 'POST':
         edit_posts = Blogs.objects.get(pk=pk)
-        form = AddPostForm(request.POST, instance=edit_posts)
+        form = AddPostForm(request.POST, request.FILES, instance=edit_posts)
 
         if form.is_valid():
             form.save()
