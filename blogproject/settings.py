@@ -24,12 +24,13 @@ ALLOWED_HOSTS = [
     'gistblog.up.railway.app',
     'gistblog.emftech.com.ng',
     'www.gistblog.emftech.com.ng'
-    ]
+]
+
 CSRF_TRUSTED_ORIGINS = [
     'https://gistblog.up.railway.app',
     'https://gistblog.emftech.com.ng',
     'https://www.gistblog.emftech.com.ng'
-    ]
+]
 PORT = os.getenv('PORT', '8000')
 
 
