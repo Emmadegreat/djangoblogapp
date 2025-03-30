@@ -12,6 +12,9 @@ class BlogSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.updated_at
 
+    def location(self, item):
+        return obj.get_absolute_url()
+
 #this ensures that static pages are optimized with SEO
 class StaticPagesSitemap(Sitemap):
     changefred = "monthly"
