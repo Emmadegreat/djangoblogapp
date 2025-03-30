@@ -15,4 +15,5 @@ urlpatterns = [
     path("not_allowed/", views.not_allowed, name="not_allowed"),
     path("subscribe/", views.subscribe, name="subscribe"),
     path("unsubscribe/", views.unsubscribe, name="unsubscribe"),
+    path("google1fc99727dbd27deb.html/", views.google_verification, name="google_verification")
 ]
