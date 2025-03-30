@@ -1,10 +1,11 @@
 from django.urls import path
 from . import views
 from django.contrib.sitemaps.views import sitemap
-from .sitemaps import BlogSitemap
+from .sitemaps import BlogSitemap, StaticPagesSitemap
 
 sitemaps = {
     'blog' : BlogSitemap(),
+    'staticpages' : StaticPagesSitemap()
 }
 
 urlpatterns = [
