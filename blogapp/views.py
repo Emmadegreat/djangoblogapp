@@ -6,10 +6,11 @@ from blogapp.form import RegisterForm, LoginForm, ContactUsForm, SubscribeForm, 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.conf import settings
+import os
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail, send_mass_mail
-from django.conf import settings
 from . decorator import allowed_users, admin_only
 # Create your views here.
 
@@ -279,3 +280,10 @@ def bad_request(request, exception):
 def permission_denied(request, exception): #permission like login related error
 
     return render(request, '403.html', status=403)
+
+
+#Google verification route
+def google_verification(request):
+    file_path = os.path.join(settings.STATIC_ROOT, "google1fc99727dbd27deb.html")
+    with open(file_path, "r") as file:
+        return HttpResponse(file.read(), content_type="text/html")
