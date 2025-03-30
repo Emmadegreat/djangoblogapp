@@ -1,5 +1,11 @@
 from django.urls import path
 from . import views
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import BlogSitemap
+
+sitemaps = {
+    'blog' : BlogSitemap(),
+}
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -15,5 +21,6 @@ urlpatterns = [
     path("not_allowed/", views.not_allowed, name="not_allowed"),
     path("subscribe/", views.subscribe, name="subscribe"),
     path("unsubscribe/", views.unsubscribe, name="unsubscribe"),
-    path("google1fc99727dbd27deb.html/", views.google_verification, name="google_verification")
+    path("google1fc99727dbd27deb.html/", views.google_verification, name="google_verification"),
+    path("sitemap.xml/", sitemap, {'sitemaps' : sitemaps}, name="sitemap"),
 ]
