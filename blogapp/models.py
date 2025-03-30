@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from cloudinary.models import CloudinaryField
+from django.urls import reverse
 # Create your models here.
 
 class BlogUserManager(BaseUserManager):
@@ -75,6 +76,11 @@ class Blogs(models.Model):
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # this ensures automatic slug and url generation for blog post
+    def get_absolute_url(self):
+        return reverse("single_blog", kwargs={"slug": self.slug})
+
 
     class Meta:
         verbose_name_plural = "Blogs"
