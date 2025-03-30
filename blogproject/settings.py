@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogapp',
     'dashboard',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
+
+SITE_ID = 1
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
