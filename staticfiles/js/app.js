@@ -15,12 +15,12 @@ const confirmDelete = () => {
 }
 
 
- document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('subscription-form');
-        const messageContainer = document.getElementById('subscription-message');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('subscription-form');
+    const messageContainer = document.getElementById('subscription-message');
 
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission behavior
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
 
             const formData = new FormData(form); // Collect form data
             const url = form.getAttribute('data-url'); // Get the URL from the form's data attribute
