@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import BlogSitemap, StaticPagesSitemap
 
@@ -24,4 +25,17 @@ urlpatterns = [
     path("unsubscribe/", views.unsubscribe, name="unsubscribe"),
     path("google1fc99727dbd27deb.html/", views.google_verification, name="google_verification"),
     path("sitemap.xml/", sitemap, {'sitemaps' : sitemaps}, name="sitemap"),
+
+    #reset password urls
+    path("password_reset/", auth_views.PasswordResetView.as_view(template_name="password_reset.html"), name="password_reset"),
+    path('password_reset_confirm/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
+        name='password_reset_confirm'),
+
+    path('password-reset-complete/',
+        auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
+        name='password_reset_complete'),
+
+    path('password-reset-done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
+         name='password_reset_done'),
 ]

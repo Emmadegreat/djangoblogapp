@@ -55,7 +55,7 @@
                     {% endfor %}
 
                 </div>
-                <a href="" class="ml-[24px] text-green-700 font-normal text-[14px]">Forgot Password?</a>
+                <a href="{% url 'password_reset' %}" class="ml-[24px] text-green-700 font-normal text-[14px]">Forgot Password?</a>
 
                 <button type="submit" class="rounded bg-green-700 hover:bg-green-800 px-4 h-[40px] text-white w-full">Login</button>
                 <p class="mb-4 my-4 flex justify-start">New to GistBlog? &nbsp; <a href="{% url 'register' %}"

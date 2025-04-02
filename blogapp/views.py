@@ -287,3 +287,8 @@ def google_verification(request):
     file_path = os.path.join(settings.STATIC_ROOT, "google1fc99727dbd27deb.html")
     with open(file_path, "r") as file:
         return HttpResponse(file.read(), content_type="text/html")
+
+
+def forgot_password(request):
+
+    return render(request, 'forgot_password.html')
