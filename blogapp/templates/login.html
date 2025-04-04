@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
 {% block title %}<title>Login Gisblog</title>{% endblock title %}
 
 {% block content %}
@@ -62,6 +63,14 @@
                     class="text-green-700">Create Account</a>
                 </p>
             </form>
+        </div> <br/>
+
+        <h3>or sign in with</h3>
+        <div class="flex justify-around">
+            <a href="">facebook</a>
+            <a href="{% provider_login_url 'google' %}">Google</a>
+            <a href="">github</a>
+            <a href="">linkedin</a>
         </div>
     </section>
 
