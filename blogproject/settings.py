@@ -47,9 +47,22 @@ INSTALLED_APPS = [
     'dashboard',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    #allauth app
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 SITE_ID = 1
+
+#django allauth config
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+#ACCOUNT_EMAIL_REQUIRED = True
+#ACCOUNT_LOGIN_METHODS = 'email'
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD  = 'email'
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
@@ -62,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 AUTH_USER_MODEL = 'blogapp.BlogUser'
@@ -70,8 +84,8 @@ ROOT_URLCONF = 'blogproject.urls'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
 
 
 TEMPLATES = [
@@ -90,6 +104,17 @@ TEMPLATES = [
         },
     },
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online',},
+        'OAUTH_PKCE_ENABLED':True,
+    }
+}
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+#LOGIN_REDIRECT_URL = 'home'
 
 SESSION_COOKIE_AGE = 1209600 #two weeks
 SESSION_COOKIE_SECURE = True

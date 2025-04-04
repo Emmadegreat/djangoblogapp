@@ -38,4 +38,8 @@ urlpatterns = [
 
     path('password-reset-done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
          name='password_reset_done'),
+
+    # path("social_auth", views.social_auth, name="social_auth"),
+    # path("facebook", views.facebook_signin, name="facebook"),
+    # path("google", views.google_signin, name="google"),
 ]
