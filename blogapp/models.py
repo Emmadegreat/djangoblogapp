@@ -93,7 +93,7 @@ class Blogs(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Blogs, on_delete=models.CASCADE)
-    comment = models.TextField(max_length=3000)
+    comment = models.TextField(max_length=3000, blank=False)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
 
