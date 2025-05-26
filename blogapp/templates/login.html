@@ -66,12 +66,11 @@
         </div> <br/>
 
         <h3>or sign in with</h3>
-        <div class="flex justify-around">
-            <a href="">facebook</a>
-            <a href="{% provider_login_url 'google' %}">Google</a>
-            <a href="">github</a>
-            <a href="">linkedin</a>
-        </div>
+        {% comment %} <div class="flex justify-around">
+
+            <a class="px-4 bg-green-700 text-white font-semibold py-2" href="{% provider_login_url 'google' %}">Google</a>
+
+        </div> {% endcomment %}
     </section>
 
 {% endblock content %}
