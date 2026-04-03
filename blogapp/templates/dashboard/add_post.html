@@ -5,14 +5,14 @@
 
 {% block content %}
 
-<section class="sm:px-8 px-6 py-[30px] sm:py-[60px] bg-[#fffee7]">
+<section class="sm:px-8 px-6 py-[30px] sm:py-[60px] bg-[#fff]">
 
     <div class="flex justify-center items-center">
         <a href="{% url 'posts' %}" class="m-8 hover:text-green-700"> &larr;Back to posts</a>
         <h2 class="ml-4">Add post</h2>
     </div>
 
-    <div class="max-w-[400px] m-auto border-[1px] rounded-md py-4 px-6 border-green-700">
+    <div class="max-w-[500px] m-auto border-[1px] rounded-md py-4 px-6 border-green-700">
 
         <form class="space-y-4" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
