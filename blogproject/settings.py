@@ -131,7 +131,7 @@ WSGI_APPLICATION = 'blogproject.wsgi.application'
 
 # Database
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DATABASE_ENGINE'),
         'NAME': os.environ.get('DATABASE_NAME'),
@@ -140,7 +140,7 @@ DATABASES = {
         "HOST": os.environ.get('DATABASE_HOST'),
         "PORT": os.environ.get('DATABASE_PORT'),
     }
-}
+}'''
 
 DATABASES = {
     'default' : {

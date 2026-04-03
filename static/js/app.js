@@ -54,3 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+
+//ensure the comment input field is not empty before submitting
+
+function validateComment() {
+    let comment = document.getElementById("commentId").value.trim();
+    if (!comment) {
+        alert("Please you must write a comment before submitting.");
+        return false;
+    }
+    return true;
+}

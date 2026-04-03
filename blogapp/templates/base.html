@@ -13,7 +13,7 @@
     <link href="{% static 'images/hero-image.jpg' %}" rel="icon" />
 </head>
 <body>
-    <section class="flex flex-col">
+    <header class="flex flex-col fixed">
         <div class="md:flex-row flex-col flex justify-between items-center px-6 sm:px-8">
 
             <ul class="py-4 text-[18px] flex items-center justify-center">
@@ -80,7 +80,7 @@
 
 
         </nav>
-    </section>
+    </header>
     <main class="flex flex-col pb-16">
         {%  block content %}
 
@@ -111,5 +111,5 @@
     </footer>
 
         <script src="{% static 'js/app.js' %}"></script>
-    </body>
+</body>
 </html>
