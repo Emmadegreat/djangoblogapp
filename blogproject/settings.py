@@ -47,10 +47,10 @@ INSTALLED_APPS = [
     'dashboard',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    #'allauth',
+    #'allauth.account',
+    #'allauth.socialaccount',
+    #'allauth.socialaccount.providers.google',
 ]
 
 SITE_ID = 2
@@ -75,7 +75,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
 MIDDLEWARE = [
-    'allauth.account.middleware.AccountMiddleware',
+    #allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,7 +92,7 @@ ROOT_URLCONF = 'blogproject.urls'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    #'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
@@ -131,7 +131,7 @@ WSGI_APPLICATION = 'blogproject.wsgi.application'
 
 # Database
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DATABASE_ENGINE'),
         'NAME': os.environ.get('DATABASE_NAME'),
@@ -140,8 +140,9 @@ WSGI_APPLICATION = 'blogproject.wsgi.application'
         "HOST": os.environ.get('DATABASE_HOST'),
         "PORT": os.environ.get('DATABASE_PORT'),
     }
-}'''
+}
 
+'''
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.postgresql',
@@ -151,7 +152,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}
+}'''
 
 # POSTGRES_LOCALLY = True
 # if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:

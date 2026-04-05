@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-//ensure the comment input field is not empty before submitting
+
 
 function validateComment() {
     let comment = document.getElementById("commentId").value.trim();
@@ -66,3 +66,4 @@ function validateComment() {
     }
     return true;
 }
+

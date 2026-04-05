@@ -13,8 +13,9 @@
     <link href="{% static 'images/hero-image.jpg' %}" rel="icon" />
 </head>
 <body>
-    <header class="flex flex-col fixed">
-        <div class="md:flex-row flex-col flex justify-between items-center px-6 sm:px-8">
+    <header class="w-full h-[60px] py-2 bg-white fixed top-0 left-0">
+        
+        {% comment %} <div class="md:flex-row flex-col flex justify-between items-center px-6 sm:px-8">
 
             <ul class="py-4 text-[18px] flex items-center justify-center">
                 {% for category in categories %}
@@ -31,15 +32,15 @@
                 </div>
 
             </form>
-        </div>
-        <nav class="bg-green-700 h-[60px] flex w-full justify-between py-2 sm:px-8 px-6 items-center">
-            <a href="{% url 'home' %}" class="text-white font-bold text-center text-[28px]">Gistblog</a>
+        </div> {% endcomment %}
+        <nav class="flex justify-between sm:px-8 px-6 items-center">
+            <a href="{% url 'home' %}" class="text-green-700 font-bold text-center text-[28px]">Gistblog</a>
 
 
                     <ul class="flex items-center">
-                        <li class="mx-2"><a class="text-white text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
-                        <li class="mx-2"><a class="text-white text-[20px] no-underline" href="{% url 'about' %}">About</a></li>
-                        <li class="mx-2"><a class="text-white text-[20px] no-underline" href="{% url 'contact_us' %}">Contact</a></li>
+                        <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
+                        <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'about' %}">About</a></li>
+                        <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'contact_us' %}">Contact</a></li>
                     </ul>
 
 
@@ -48,12 +49,12 @@
                         {% if user.is_authenticated and user.is_staff %}
 
                                 <button class="">
-                                    <a class="bg-white py-2 px-5 rounded-md border-[1px] border-white text-green-700 hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
+                                    <a class="bg-white py-2 px-5 rounded-md border-[1px] border-green-700 text-green-700 hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
                                         Dashboard
                                     </a>
                                 </button>
                                 <button class="">
-                                    <a class="text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-white" aria-current="page" href="{% url 'Logout' %}">
+                                    <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
                                         Logout
                                     </a>
                                 </button>
@@ -66,12 +67,12 @@
                                 </button>
                             {% else %}
                                 <button class="">
-                                    <a class="text-white hover:bg-white hover:text-green-700 rounded-md mx-4 py-2 px-6 border-[1px] border-white" aria-current="page" href="{% url 'login' %}">
+                                    <a class="text-white bg-green-700 hover:bg-white hover:text-green-700 rounded-md mx-4 py-2 px-6 border-[1px] border-green-700" aria-current="page" href="{% url 'login' %}">
                                         Login
                                     </a>
                                 </button>
                                 <button class="">
-                                    <a class="bg-white py-2 px-5 rounded-md border-[1px] border-white text-green-700 hover:text-white hover:bg-green-700" href="{% url 'register' %}">
+                                    <a class="bg-white py-2 px-5 rounded-md border-[1px] border-green-700 text-green-700 hover:text-white hover:bg-green-700" href="{% url 'register' %}">
                                         Register
                                     </a>
                                 </button>
