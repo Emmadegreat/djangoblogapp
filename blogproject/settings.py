@@ -91,15 +91,7 @@ TEMPLATES = [
     },
 ]
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online',},
-        'OAUTH_PKCE_ENABLED':True,
-    }
-}
 
-SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = '/'
 
 SESSION_COOKIE_AGE = 1209600 #two weeks
