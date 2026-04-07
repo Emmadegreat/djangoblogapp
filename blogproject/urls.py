@@ -30,7 +30,6 @@ urlpatterns = [
     # path('category/', include("blogapp.urls")),
     path("<slug:slug>/", Blogview.Blogs, name = "blogs"),
     path("dashboard/", include("dashboard.urls")),
-    path("accounts/", include("allauth.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
