@@ -22,14 +22,14 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'gistblog.up.railway.app',
-    'gistblog.emftech.com.ng',
-    'www.gistblog.emftech.com.ng'
+    'gistblog.emmanuelmkpurunchi.co.uk',
+    'www.gistblog.emmanuelmkpurunchi.co.uk'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://gistblog.up.railway.app',
-    'https://gistblog.emftech.com.ng',
-    'https://www.gistblog.emftech.com.ng'
+    'https://gistblog.emmanuelmkpurunchi.co.uk',
+    'https://www.gistblog.emmanuelmkpurunchi.co.uk'
 ]
 PORT = os.getenv('PORT', '8000')
 
