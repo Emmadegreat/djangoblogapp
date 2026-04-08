@@ -1,14 +1,13 @@
 #!/bin/bash
 set -e
 
-echo "Switching to app directory..."
 cd /app
 
-echo "Installing Node dependencies..."
-npm install
+echo "Installing Node dependencies (including dev)..."
+npm install --include=dev
 
 echo "Building Tailwind CSS..."
-npm run build
+npx tailwindcss -i ./static/css/index.css -o ./static/css/main.css --minify
 
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
