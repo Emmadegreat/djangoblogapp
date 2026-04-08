@@ -66,4 +66,3 @@ function validateComment() {
     }
     return true;
 }
-
