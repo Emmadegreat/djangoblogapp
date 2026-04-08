@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["nodejs", "python311"]
+
+[phases.build]
+cmds = ["bash build.sh"]
+
+[start]
+cmd = "gunicorn blogproject.wsgi --bind 0.0.0.0:$PORT"
