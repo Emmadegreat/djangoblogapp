@@ -6,41 +6,53 @@
 
 
 
-    <section class="my-4 py-4 container">
-            <h3>Category - {{ category }}</h3>
-        {% comment %} {% for category in category_post %}
+    <section class="max-w-[1100px] mx-auto px-6 sm:px-8 py-10">
 
-            <p>{{ category.title }}</p>
+        <div class="mb-8">
+            <p class="text-sm text-gray-400 uppercase tracking-wide mb-1">Browsing</p>
+            <h3 class="text-[32px] font-semibold text-green-700">{{ category }}</h3>
+            <hr class="mt-4" />
+        </div>
 
-        {% endfor %} {% endcomment %}
+    
+        {% if posts %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for recent_post in posts %}
 
-                    <div class="row">
-                        <div class="post-wrapper p-6">
-                            <div class="col-lg-6">
-                            <!-- Recnet post-->
+                    <div class="flex flex-col rounded-md shadow-sm border-[1px] border-gray-100">
 
-                            {% for recent_post in posts %}
-
-                            <div class="card mb-4">
-
-                                <img class="card-img-top" src="{{ recent_post.blog_image.url }}" alt="post image" style="width:100%; height:300px;" />
-                                <div class="card-body">
-                                    <div class="small text-muted">
-                                        {{recent_post.created_at}} {{recent_post.created_at | timesince}}
-                                        <span style="float:right;"> Author:  {{recent_post.author.first_name}}</span>
-                                    </div>
-                                    <h2 class="card-title h4">{{ recent_post.title }}</h2>
-                                    <p class="card-text">{{recent_post.short_description | truncatewords:20}}</p>
-                                    <a class="btn btn-primary" href="{% url 'single_blog' slug=recent_post.slug %}">Read more →</a>
-                                </div>
-                            </div>
-                            {% endfor %}
-
+                        <div class="w-full h-[220px] overflow-hidden rounded-t-md">
+                            <img 
+                                class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300" 
+                                src="{{ recent_post.blog_image.url }}" 
+                                alt="post image" 
+                            />
                         </div>
+
+                        <div class="flex flex-col flex-1 p-4">
+                            <div class="flex items-center justify-between text-sm text-gray-400 italic mb-3">
+                                <span>{{ recent_post.created_at }}</span>
+                                <span>{{ recent_post.author.first_name }}</span>
+                            </div>
+                            <h2 class="text-[20px] font-medium text-green-700 mb-2">{{ recent_post.title }}</h2>
+                            <p class="text-[16px] leading-7 text-gray-600 mb-4">{{ recent_post.short_description | truncatewords:20 }}</p>
+                            <a class="mt-auto w-fit py-2 px-4 rounded-md border-[1px] border-green-700 text-green-700 hover:bg-green-700 hover:text-white transition-colors duration-200" 
+                            href="{% url 'single_blog' slug=recent_post.slug %}">
+                                Read more →
+                            </a>
                         </div>
 
                     </div>
-        </div>
+
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <div class="text-center py-20">
+                <p class="text-gray-400 text-[18px] italic">No posts found in this category yet.</p>
+                <a href="{% url 'home' %}" class="mt-4 inline-block text-green-700 hover:underline">← Back to Home</a>
+            </div>
+        {% endif %}
 
     </section>
 

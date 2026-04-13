@@ -12,23 +12,33 @@
 
     </section>
 
-    <div class="md:flex-row flex-col flex justify-between items-center px-6 sm:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center px-4 sm:px-8 py-4 gap-4">
 
-        <ul class="py-4 text-[18px] flex items-center justify-center">
+        <ul class="flex flex-wrap items-center justify-center gap-2">
             {% for category in categories %}
-
-                <a class="text-sm md:text-[12px] mx-2 hover:text-green-700" href="{% url 'post_by_category' category.id %}">{{category}}</a>
-
+                <a class="md:text-sm text-[12px] px-3 py-1 rounded-full border-[1px] border-green-700 text-green-700 hover:bg-green-700 hover:text-white transition-colors duration-200" 
+                href="{% url 'post_by_category' category.id %}">
+                    {{ category }}
+                </a>
             {% endfor %}
         </ul>
-        <form action="{% url 'search' %}" method="GET">
-            <div class="input-group">
-                <label for="search">
-                <input class="form-control focus:outline-none border-[1px] h-[40px] px-4" name="keyword" type="search" placeholder="Search..." />
-                <button class="bg-green-700 text-white border-[1px] border-white px-4 h-[40px] ml-[-5px]" id="button-search" type="submit">Search post</button>
-            </div>
 
+        <form action="{% url 'search' %}" method="GET">
+            <div class="flex items-center">
+                <input 
+                    class="focus:outline-none border-[1px] border-gray-300 focus:border-green-700 h-[40px] px-4 rounded-l-md w-[220px] sm:w-[280px]" 
+                    name="keyword" 
+                    type="search" 
+                    placeholder="Search posts..." 
+                />
+                <button 
+                    class="bg-green-700 text-white md:text-sm text-[12px] h-[40px] px-4 rounded-r-md hover:bg-green-800 transition-colors duration-200 whitespace-nowrap" 
+                    type="submit">
+                    Search
+                </button>
+            </div>
         </form>
+
     </div>
 
     {% if messages %}
@@ -51,7 +61,7 @@
         {% endfor %}
 
     {% endif %}
-    <section class="px-[32px] flex flex-col">
+    <section class="px-[20px] md:px-[32px] flex flex-col">
 
         <h3 class="text-[40px] font-semibold text-center pt-8 text-green-700">Featured Post</h3>
         <hr>
@@ -59,7 +69,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-6">
             {% for post in featured_post %}
 
-            <div class="card flex flex-col rounded-md shadow-sm">
+            <div class="card flex flex-col rounded-md shadow-md">
 
                 <div class="w-full h-[220px] overflow-hidden">
                     <img class="w-full h-full object-cover object-center" src="{{ post.blog_image.url }}" alt="featured image" />
