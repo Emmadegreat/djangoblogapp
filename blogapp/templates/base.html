@@ -10,80 +10,122 @@
 
     {% block title %}{% endblock title %}
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
-    <link href="{% static 'images/hero-image.jpg' %}" rel="icon" />
+    <link href="{% static 'images/logo.png' %}" rel="icon" />
 </head>
 <body>
-    <header class="w-full h-[60px] py-2 bg-white fixed top-0 left-0">
-        
-        {% comment %} <div class="md:flex-row flex-col flex justify-between items-center px-6 sm:px-8">
+    <header class="w-full h-[60px] py-2 bg-white fixed top-0 left-0 sm:px-8 px-4 flex justify-between md:block z-50">
 
-            <ul class="py-4 text-[18px] flex items-center justify-center">
-                {% for category in categories %}
-
-                    <a class="text-sm md:text-[12px] mx-2 hover:text-green-700" href="{% url 'post_by_category' category.id %}">{{category}}</a>
-
-                {% endfor %}
-            </ul>
-            <form action="{% url 'search' %}" method="GET">
-                <div class="input-group">
-                    <label for="search">
-                    <input class="form-control focus:outline-none border-[1px] h-[40px] px-4" name="keyword" type="search" placeholder="Search..." />
-                    <button class="bg-green-700 text-white border-[1px] border-white px-4 h-[40px] ml-[-5px]" id="button-search" type="submit">Search post</button>
+       <section class="flex items-center justify-between">
+            <div class="hamburger block md:hidden mr-3" id="hamburger">
+                <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 16H28" stroke="#020202" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4 8H21.3333" stroke="#020202" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4 24H16" stroke="#020202" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
                 </div>
+            <a href="{% url 'home' %}" class="block md:hidden"><img class="w-10 h-10" src="{% static 'images/logo.png' %}" alt="website logo"></a>
+       </section>
 
-            </form>
-        </div> {% endcomment %}
-        <nav class="flex justify-between sm:px-8 px-6 items-center">
-            <a href="{% url 'home' %}" class="text-green-700 font-bold text-center text-[28px]">Gistblog</a>
-
-
-                    <ul class="flex items-center">
-                        <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
-                        <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'about' %}">About</a></li>
-                        <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'contact_us' %}">Contact</a></li>
-                    </ul>
-
+        <nav class="md:flex justify-between  items-center hidden">
+            <a href="{% url 'home' %}" class="cursor-pointer"><img class="w-12 h-12" src="{% static 'images/logo.png' %}" alt="website logo"></a>
+            
+            <ul class="flex items-center">
+                <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
+                <li class="mx-4"><a class="text-green-700 text-[20px] no-underline" href="{% url 'about' %}">About</a></li>
+                <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'contact_us' %}">Contact</a></li>
+            </ul>
 
 
-                    <div class="flex items-center">
-                        {% if user.is_authenticated and user.is_staff %}
+  
+            <div class="flex items-center">
+                            
+                {% if user.is_authenticated and user.is_staff %}
 
-                                <button class="">
-                                    <a class="bg-white py-2 px-5 rounded-md border-[1px] border-green-700 text-green-700 hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
-                                        Dashboard
-                                    </a>
-                                </button>
-                                <button class="">
-                                    <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
-                                        Logout
-                                    </a>
-                                </button>
-                            {% elif user.is_authenticated %}
-                                <small class="text-white text-[14px]">You are logged in as {{user.first_name}}</small>
-                                <button class="">
-                                    <a class="text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-white" aria-current="page" href="{% url 'Logout' %}">
-                                        Logout
-                                    </a>
-                                </button>
-                            {% else %}
-                                <button class="">
-                                    <a class="text-white bg-green-700 hover:bg-white hover:text-green-700 rounded-md mx-4 py-2 px-6 border-[1px] border-green-700" aria-current="page" href="{% url 'login' %}">
-                                        Login
-                                    </a>
-                                </button>
-                                <button class="">
-                                    <a class="bg-white py-2 px-5 rounded-md border-[1px] border-green-700 text-green-700 hover:text-white hover:bg-green-700" href="{% url 'register' %}">
-                                        Register
-                                    </a>
-                                </button>
-                            {% endif %}
-                    </div>
-                     <button class="block md:hidden text-red-600 text-[24px]">X</button>
+                                    
+                    <button class="">
+                        <a class="bg-white py-2 px-5 rounded-md border-[1px] border-green-700 text-green-700 hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
+                            Dashboard
+                        </a>
+                    </button>
+                                    
+                    <button class="">
+                        <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
+                            Logout
+                        </a>
+                    </button>
+                {% elif user.is_authenticated %}
+                    <small class="text-white text-[14px]">You are logged in as {{user.first_name}}</small>
+                    <button class="">
+                        <a class="text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-white" aria-current="page" href="{% url 'Logout' %}">
+                            Logout
+                        </a>
+                    </button>
+                {% else %}
+                    <button class="">
+                        <a class="text-white bg-green-700 hover:bg-white hover:text-green-700 rounded-md mx-4 py-2 px-6 border-[1px] border-green-700" aria-current="page" href="{% url 'login' %}">
+                            Login
+                        </a>
+                    </button>
+                    <button class="">
+                        <a class="bg-white py-2 px-5 rounded-md border-[1px] border-green-700 text-green-700 hover:text-white hover:bg-green-700" href="{% url 'register' %}">
+                            Register
+                        </a>
+                    </button>
+                {% endif %}
 
+            </div>
 
         </nav>
+        <div class="md:hidden flex items-center">
+                            
+                {% if user.is_authenticated and user.is_staff %}
+
+                                    
+                    <button class="">
+                        <a class="bg-white py-2 px-2 rounded-md border-[1px] border-green-700 text-green-700 text-sm hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
+                            Dashboard
+                        </a>
+                    </button>
+                                    
+                    <button class="">
+                        <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md ml-3 py-2 px-2 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
+                            Logout
+                        </a>
+                    </button>
+                {% elif user.is_authenticated %}
+                    <small class="text-white text-[14px]">You are logged in as {{user.first_name}}</small>
+                    <button class="">
+                        <a class="text-white hover:bg-white hover:text-green-700 rounded-md ml-3 py-2 px-2 text-sm border-[1px] border-white" aria-current="page" href="{% url 'Logout' %}">
+                            Logout
+                        </a>
+                    </button>
+                {% else %}
+                    <button class="">
+                        <a class="text-white bg-green-700 hover:bg-white hover:text-green-700 rounded-md mx-2 py-2 px-3 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'login' %}">
+                            Login
+                        </a>
+                    </button>
+                    <button class="">
+                        <a class="bg-white py-2 px-2 rounded-md border-[1px] border-green-700 text-green-700 text-sm hover:text-white hover:bg-green-700" href="{% url 'register' %}">
+                            Register
+                        </a>
+                    </button>
+                {% endif %}
+
+        </div>
        
     </header>
+
+    <aside class="mobile-view md:hidden fixed w-[75%] flex flex-col h-full bg-white top-[59px] pt-10 items-start z-40 transition-transform duration-500 ease-in-out -translate-x-full" id="mobile-view">
+        <ul class="flex items-center flex-col text-justify ml-2">
+            <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
+            <li class="mx-2 my-8"><a class="text-green-700 text-[20px] no-underline" href="{% url 'about' %}">About</a></li>
+            <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'contact_us' %}">Contact</a></li>
+        </ul>
+
+    </aside>
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden" id="overlay"></div>
+
     <main class="flex flex-col pb-16">
         {%  block content %}
 
@@ -113,6 +155,8 @@
         <p class="m-0 text-center text-white">&copy; GistBlog <span id="date"></span></p>
     </footer>
 
-        <script src="{% static 'js/app.js' %}"></script>
+        
+    <script src="{% static 'js/app.js' %}"></script>
+
 </body>
 </html>

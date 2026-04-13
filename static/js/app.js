@@ -66,3 +66,21 @@ function validateComment() {
     }
     return true;
 }
+
+const hamburger = document.getElementById('hamburger');
+    const mobileView = document.getElementById('mobile-view');
+    const overlay = document.getElementById('overlay');
+
+    hamburger.addEventListener('click', () => {
+        
+        mobileView.classList.toggle('-translate-x-full');
+        mobileView.classList.toggle('translate-x-0');
+        overlay.classList.toggle('hidden');
+    });
+
+    
+    overlay.addEventListener('click', () => {
+        mobileView.classList.add('-translate-x-full');
+        mobileView.classList.remove('translate-x-0');
+        overlay.classList.add('hidden');
+    });
