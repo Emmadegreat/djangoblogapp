@@ -4,26 +4,59 @@
 
 {% block content %}
 
-    <section class="pt-12">
-        <h4 class="mt-[40px] font-semibold text-orange-600 leading-5">Search Gisblog</h4>
+    <section class="max-w-[1100px] mx-auto px-6 sm:px-8 py-10">
 
+    <!-- Search Header -->
+    <div class="mb-8">
+        <p class="text-sm text-gray-400 uppercase tracking-wide mb-1">Results for</p>
+        <h4 class="text-[32px] font-semibold text-orange-600">Search Gistblog</h4>
+        <hr class="mt-4" />
+    </div>
 
-        {% for searched in blogs %}
+    {% if blogs %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for searched in blogs %}
 
-                            <div class="card rounded-md border-[1px] border-orange-600 basis-[47%] md:mb-0 mb-8">
-                                {% comment %} <img class="card-img-top rounded-md max-h-[360px] w-full" src="{{ recent_post.blog_image.url }}" alt="post image" /> {% endcomment %}
-                                <div class="card-body p-4">
-                                    <div class="flex justify-between items-center mb-4 italic text-gray-400">
-                                        <span>{{searched.created_at}}</span>
-                                        <!--<span>{{recent_post.category}}</span>-->
-                                        <span style="float:right;"> Author:  {{searched.author.first_name}}</span></div>
-                                        <h2 class="card-title text-orange-600 font-medium mt-4 text-[20px] py-1">{{ searched.title }}</h2>
-                                        <p class="card-text text-[18px] leading-6 mb-4">{{searched.short_description | truncatewords:8}}</p>
-                                        <a class="text-orange-600" href="{% url 'single_blog' slug=searched.slug %}">Read more →</a>
-                                    </div>
-                                </div>
-                            {% endfor %}
-    </section
+                <div class="flex flex-col rounded-md border-[1px] border-orange-200 shadow-sm">
+
+                    <!-- Post Image -->
+                    {% if searched.blog_image %}
+                        <div class="w-full h-[220px] overflow-hidden rounded-t-md">
+                            <img 
+                                class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300" 
+                                src="{{ searched.blog_image.url }}" 
+                                alt="post image" 
+                            />
+                        </div>
+                    {% endif %}
+
+                    <!-- Post Body -->
+                    <div class="flex flex-col flex-1 p-4">
+                        <div class="flex items-center justify-between text-sm text-gray-400 italic mb-3">
+                            <span>{{ searched.created_at }}</span>
+                            <span>{{ searched.author.first_name }}</span>
+                        </div>
+                        <h2 class="text-[20px] font-medium text-orange-600 mb-2">{{ searched.title }}</h2>
+                        <p class="text-[16px] leading-7 text-gray-600 mb-4">{{ searched.short_description | truncatewords:20 }}</p>
+                        <a class="mt-auto w-fit py-2 px-4 rounded-md border-[1px] border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white transition-colors duration-200" 
+                           href="{% url 'single_blog' slug=searched.slug %}">
+                            Read more →
+                        </a>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div class="text-center py-20">
+            <p class="text-gray-400 text-[18px] italic mb-4">No results found for your search.</p>
+            <a href="{% url 'home' %}" class="inline-block text-orange-600 hover:underline">← Back to Home</a>
+        </div>
+    {% endif %}
+
+</section>
 
 {% endblock content %}
 

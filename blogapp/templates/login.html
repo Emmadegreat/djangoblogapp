@@ -4,12 +4,13 @@
 
 {% block content %}
 
-    <section class="mt-[24px]">
+    <section class="mt-[40px] md:px px-4">
+        <article class="h-[120px] md:h-[160px]"></article>
 
         {% if messages %}
 
             {% for message in messages %}
-                <div class="text-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-700 text-white
+                <div class="tgap-2 ext-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-700 text-white
                    {% elif message.tags == 'danger' %} bg-red-400 text-white {% elif message.tags == 'warning' %} bg-yellow-400 text-black
                     {% elif message.tags == 'info' %} bg-blue-400 text-black {% else %} bg-gray-400 text-black {% endif %}"
                     id="message-{{ forloop.counter }}">
@@ -27,7 +28,10 @@
         {% endif %}
 
         <div class="rounded flex flex-col  mt-[40px] gap-4 border-green-700 border-[1px] max-w-[500px] m-auto">
-            <p class="text-center mt-4">Hello!, welcome back</p><hr>
+            <div class="px-6 pt-6 pb-4 text-center border-b-[1px] border-gray-100">
+            <h2 class="text-[24px] font-semibold text-green-700">Welcome Back</h2>
+            <p class="text-gray-400 text-sm mt-1">Login to your GistBlog account</p>
+        </div>
             <form method = "POST" class="py-4 px-6" novalidate>
 
                 {% for error in form.non_field_errors %}
@@ -55,21 +59,17 @@
                     {% endfor %}
 
                 </div>
-                <a href="{% url 'password_reset' %}" class="ml-[24px] text-green-700 font-normal text-[14px]">Forgot Password?</a>
+                <div class="flex items-end justify-end pb-1"><a href="{% url 'password_reset' %}" class="text-green-700 text-sm">Forgot Password?</a></div>
 
                 <button type="submit" class="rounded bg-green-700 hover:bg-green-800 px-4 h-[40px] text-white w-full">Login</button>
                 <p class="mb-4 my-4 flex justify-start">New to GistBlog? &nbsp; <a href="{% url 'register' %}"
-                    class="text-green-700">Create Account</a>
+                    class="text-green-700 text-sm md:text-[14px]">Create Account</a>
                 </p>
             </form>
-        </div> <br/>
+        </div> 
 
-        <h3>or sign in with</h3>
-        {% comment %} <div class="flex justify-around">
+        <article class="mb-[100px]"></article>
 
-            <a class="px-4 bg-green-700 text-white font-semibold py-2" href="{% provider_login_url 'google' %}">Google</a>
-
-        </div> {% endcomment %}
     </section>
 
 {% endblock content %}
