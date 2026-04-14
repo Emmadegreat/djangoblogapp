@@ -3,88 +3,106 @@
 {% block title %}<title>Users - Gisblog</title>{% endblock title %}
 
 {% block content %}
-    <section class="sm:px-8 px-6 py-[30px] sm:py-[60px]">
+    <section class="px-4 sm:px-6 py-10 mt-[80px] mb-10">
+
         {% if messages %}
-
-            {% for message in messages %}
-                <div class="text-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-400 text-white
-                   {% elif message.tags == 'danger' %} bg-red-400 text-white {% elif message.tags == 'warning' %} bg-yellow-400 text-black
-                    {% elif message.tags == 'info' %} bg-blue-400 text-black {% else %} bg-gray-400 text-black {% endif %}"
-                    id="message-{{ forloop.counter }}">
-                    {{ message }}
-
-                    <button
-                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[24px] font-700 text-gray-200 hover:text-gray-900"
+            <div class="fixed top-[70px] left-0 w-full z-50 px-4 flex flex-col gap-2">
+                {% for message in messages %}
+                    <div class="text-[15px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2
+                        {% if message.tags == 'success' %} bg-green-700 text-white
+                        {% elif message.tags == 'danger' %} bg-red-400 text-white
+                        {% elif message.tags == 'warning' %} bg-yellow-400 text-black
+                        {% elif message.tags == 'info' %} bg-blue-400 text-black
+                        {% else %} bg-gray-400 text-black {% endif %}"
+                        id="message-{{ forloop.counter }}">
+                        {{ message }}
+                        <button
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-[24px] text-gray-200 hover:text-gray-900"
                             onclick="closeMessage('message-{{ forloop.counter }}')">
-                        &times;
-                    </button>
-                </div>
-
-            {% endfor %}
-
+                            &times;
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
 
-        <h1 class="text-black text-[32px]">Dashboard/Users</h1>
-        <div class="flex-col md:flex-row flex">
-            <div class="card basis-[25%] flex flex-col w-full border-[1px] border-green-700 p-4 rounded-md">
+        <div class="mb-8">
+            <p class="text-sm text-gray-400 uppercase tracking-wide mb-1">{{user.first_name}}'s Dashboard</p>
+            <h1 class="text-[32px] font-semibold text-green-700">Users</h1>
+            <hr class="mt-4" />
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6">
+
+            <div class="basis-[25%] flex flex-col w-full border-[1px] border-green-700 p-4 rounded-md shadow-sm">
                 {% include "./leftside.html" %}
             </div>
-            <div class="card basis-[70%] mx-4 w-full flex flex-col">
-                <div class="flex justify-between mb-4 px-0">
-                    <h3 class="text-[16px] font-medium">All Posts</h3>
-                    <button class="">
-                        <a class="text-white bg-green-700 rounded-md py-2 px-6" aria-current="page" href="{% url 'add_user' %}">
-                            Add User
-                        </a>
-                    </button>
+
+            <div class="basis-[75%] w-full flex flex-col gap-4">
+
+                <div class="flex items-center justify-between">
+                    <h3 class="text-[18px] font-medium text-gray-700">All Users</h3>
+                    <a class="text-white bg-green-700 hover:bg-green-800 rounded-md py-2 px-6 transition-colors duration-200 text-sm" 
+                    href="{% url 'add_user' %}">
+                        + Add User
+                    </a>
                 </div>
-                <div class="overflow-x-auto border-[1px] border-green-700 rounded-md">
-                    <table class="min-w-full ">
-                        <thead class="bg-gray-100">
+
+                <div class="overflow-x-auto border-[1px] border-green-700 rounded-md shadow-sm">
+                    <table class="min-w-full">
+                        <thead class="bg-green-700">
                             <tr>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">Id</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">First Name</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">Last Name</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">Email</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">is_staff</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">is_active</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">is_superuser</th>
-                                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 border border-gray-300">Action</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-white">Id</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-white">First Name</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-white">Last Name</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-white">Email</th>
+                                <th class="px-4 py-3 text-center text-sm font-medium text-white">Staff</th>
+                                <th class="px-4 py-3 text-center text-sm font-medium text-white">Active</th>
+                                <th class="px-4 py-3 text-center text-sm font-medium text-white">Superuser</th>
+                                <th class="px-4 py-3 text-center text-sm font-medium text-white">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-200">
                             {% for user in users %}
-                            <tr class="bg-white hover:bg-gray-50">
-                                <td class="px-3 py-2 text-sm text-gray-700 border border-gray-300">{{ forloop.counter }}</td>
-                                <td class="px-3 py-2 text-sm text-gray-700 border border-gray-300">{{ user.first_name }}</td>
-                                <td class="px-3 py-2 text-sm text-gray-700 border border-gray-300">{{ user.last_name }}</td>
-                                <td class="px-3 py-2 text-sm text-gray-700 border border-gray-300">{{ user.email }}</td>
-                                <td class="px-3 py-2 text-[18px] text-center border border-gray-300">
-                                    {% if user.is_staff %}<span class="text-green-600">&#x2713;</span> {% else %}
-                                        <span class="text-red-700">&#xd7;</span>
+                            <tr class="bg-white hover:bg-gray-50 transition-colors duration-150">
+                                <td class="px-4 py-3 text-sm text-gray-600">{{ forloop.counter }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700">{{ user.first_name }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700">{{ user.last_name }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700">{{ user.email }}</td>
+                                <td class="px-4 py-3 text-center">
+                                    {% if user.is_staff %}
+                                        <span class="text-green-600 text-[18px]">&#x2713;</span>
+                                    {% else %}
+                                        <span class="text-red-600 text-[18px]">&#xd7;</span>
                                     {% endif %}
                                 </td>
-                                <td class="px-3 py-2 text-[18px] text-center border border-gray-300">
-                                    {% if user.is_active %}<span class="text-green-600">&#x2713;</span> {% else %}
-                                        <span class="text-red-600">&#xd7;</span>
+                                <td class="px-4 py-3 text-center">
+                                    {% if user.is_active %}
+                                        <span class="text-green-600 text-[18px]">&#x2713;</span>
+                                    {% else %}
+                                        <span class="text-red-600 text-[18px]">&#xd7;</span>
                                     {% endif %}
                                 </td>
-                                <td class="px-3 py-2 text-[18px] text-center border border-gray-300">
-                                    {% if user.is_superuser %}<span class="text-green-600">&#x2713;</span> {% else %}
-                                        <span class="text-red-600">&#xd7;</span>
+                                <td class="px-4 py-3 text-center">
+                                    {% if user.is_superuser %}
+                                        <span class="text-green-600 text-[18px]">&#x2713;</span>
+                                    {% else %}
+                                        <span class="text-red-600 text-[18px]">&#xd7;</span>
                                     {% endif %}
                                 </td>
-                                <td class="flex px-3 py-2 text-[12px] text-gray-700 border border-gray-300">
-                                    <a href="{% url 'edit_user' user.id %}" class="px-4 mx-2 py-2 text-white bg-orange-400
-                                        rounded hover:bg-orange-600 focus:outline-none">
-                                        Edit
-                                    </a>
-                                    <a href="{% url 'delete_user' user.id %}" onclick="return confirmDelete();"
-                                        class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-600 focus:outline-none">
-                                        Delete
-                                    </a>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center gap-2 justify-center">
+                                        <a href="{% url 'edit_user' user.id %}" 
+                                        class="px-3 py-1 text-white text-sm bg-orange-400 rounded hover:bg-orange-600 transition-colors duration-200">
+                                            Edit
+                                        </a>
+                                        <a href="{% url 'delete_user' user.id %}" 
+                                        onclick="return confirmDelete();"
+                                        class="px-3 py-1 text-white text-sm bg-red-600 rounded hover:bg-red-800 transition-colors duration-200">
+                                            Delete
+                                        </a>
+                                    </div>
                                 </td>
-
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -92,8 +110,8 @@
                 </div>
 
             </div>
-
         </div>
+        <article class="h-[80px] mb-[100px]"></article>
 
     </section>
 

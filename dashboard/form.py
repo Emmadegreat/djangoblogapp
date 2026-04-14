@@ -8,8 +8,7 @@ class AddCategoryForm(forms.ModelForm):
         max_length=50,
         label="Category Name",
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'style':'border-radius: 6px; width: 300px; height: 40px; padding:6px; border:1px solid #000',
+            'class': 'form-control'
         })
     )
 

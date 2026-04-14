@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'dashboard',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'widget_tweaks',
 ]
 
 SITE_ID = 2

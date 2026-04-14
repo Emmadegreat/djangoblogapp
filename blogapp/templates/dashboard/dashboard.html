@@ -4,22 +4,34 @@
 
 {% block content %}
 
-    <section class="sm:px-8 px-6 py-[30px] sm:py-[60px]">
+    <section class="mx-4 md:px-6 py-10 mt-[100px]">
 
-        <h4 class="my-[20px] font-semibold text-green-700 leading-5 text-[32px]">{{ user.first_name }}'s Dashboard</h4>
-        <div class="flex-col md:flex-row flex justify-between">
-            <div class="card basis-[25%] flex flex-col w-full border-[1px] border-green-700 p-4 rounded-md">
+        <div class="mb-8">
+            <p class="text-sm text-gray-400 uppercase tracking-wide mb-1">Overview</p>
+            <h4 class="text-[32px] font-semibold text-green-700">{{ user.first_name }}'s Dashboard</h4>
+            <hr class="mt-4" />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div class="border-[1px] border-green-700 p-6 rounded-md shadow-sm">
                 {% include "./leftside.html" %}
             </div>
-            <div class="card basis-[33%] mx-4 w-full border-[1px] border-green-700 p-4 rounded-md text-center">
-                <h3 class="font-semibold text-[20px]">All Categories</h3>
-                <p>{{ category_count }}</p>
+
+            <div class="border-[1px] border-green-700 p-6 rounded-md shadow-sm flex flex-col items-center justify-center text-center">
+                <p class="text-sm text-gray-400 uppercase tracking-wide mb-2">Total</p>
+                <h3 class="font-semibold text-[20px] text-green-700 mb-2">All Categories</h3>
+                <p class="text-[48px] font-bold text-green-700">{{ category_count }}</p>
             </div>
-            <div class="card basis-[33%] w-full border-[1px] border-green-700 p-4 rounded-md text-center">
-                <h3 class="font-semibold text-[20px]">All Posts</h3>
-                <p>{{ blog_count }}</p>
+
+            <div class="border-[1px] border-green-700 p-6 rounded-md shadow-sm flex flex-col items-center justify-center text-center">
+                <p class="text-sm text-gray-400 uppercase tracking-wide mb-2">Total</p>
+                <h3 class="font-semibold text-[20px] text-green-700 mb-2">All Posts</h3>
+                <p class="text-[48px] font-bold text-green-700">{{ blog_count }}</p>
             </div>
+
         </div>
+           <article class="h-[120px] mb-[100px]"></article>
 
     </section>
 
