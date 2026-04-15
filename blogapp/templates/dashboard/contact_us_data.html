@@ -4,47 +4,52 @@
 
 {% block content %}
 
-<section class="sm:px-8 px-6 py-[30px] sm:py-[60px]">
+    <section class="px-6 sm:px-8 py-12 mt-[80px] mb-10">
 
-   <div class="mt-8 p-6 rounded-lg shadow-md">
 
-        <div class="flex justify-between">
-            <a href="{% url 'dashboard' %}" class="text-green-700"> &larr;Back to dashboard</a>
-            <h5 class="text-xl font-semibold">Contact us mails</h5>
+        <div class="mb-8">
+            <a href="{% url 'dashboard' %}" class="text-sm text-gray-400 hover:text-green-700 transition-colors duration-200">
+                &larr; Back to Dashboard
+            </a>
+            <h2 class="text-[32px] font-semibold text-green-700 mt-2">Contact Us Mails</h2>
+            <hr class="mt-4" />
         </div>
+
         {% if contact_data %}
-            <table class="table-auto w-full text-left border-collapse border border-gray-300">
-                <thead>
-                    <tr class="bg-gray-300">
-                        <th class="px-4 py-2 border border-gray-300">Id</th>
-                        <th class="px-4 py-2 border border-gray-300">Full Name</th>
-                        <th class="px-4 py-2 border border-gray-300">Email</th>
-                        <th class="px-4 py-2 border border-gray-300">Phone</th>
-                        <th class="px-4 py-2 border border-gray-300">Message</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for contact in contact_data %}
+
+            <div class="overflow-x-auto border-[1px] border-green-700 rounded-md shadow-sm">
+                <table class="min-w-full">
+                    <thead class="bg-green-700">
                         <tr>
-                            <td class="px-4 py-2 border border-gray-300">{{ forloop.counter }}</td>
-                            <td class="px-4 py-2 border border-gray-300">{{ contact.fullname }}</td>
-                            <td class="px-4 py-2 border border-gray-300">{{ contact.email }}</td>
-                            <td class="px-4 py-2 border border-gray-300">{{ contact.phone }}</td>
-                            <td class="px-4 py-2 border border-gray-300">{{ contact.message }}</td>
+                            <th class="px-4 py-3 text-left text-sm font-medium text-white">Id</th>
+                            <th class="px-4 py-3 text-left text-sm font-medium text-white">Full Name</th>
+                            <th class="px-4 py-3 text-left text-sm font-medium text-white">Email</th>
+                            <th class="px-4 py-3 text-left text-sm font-medium text-white">Phone</th>
+                            <th class="px-4 py-3 text-left text-sm font-medium text-white">Message</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        {% for contact in contact_data %}
+                            <tr class="bg-white hover:bg-gray-50 transition-colors duration-150">
+                                <td class="px-4 py-3 text-sm text-gray-600">{{ forloop.counter }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700">{{ contact.fullname }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700">{{ contact.email }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700">{{ contact.phone }}</td>
+                                <td class="px-4 py-3 text-sm text-gray-700 max-w-[300px]">{{ contact.message }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
         {% else %}
-            <p class="text-gray-500">No contact details found.</p>
+            <div class="text-center py-20">
+                <p class="text-gray-400 text-[18px] italic mb-4">No contact messages found.</p>
+                <a href="{% url 'dashboard' %}" class="inline-block text-green-700 hover:underline">← Back to Dashboard</a>
+            </div>
         {% endif %}
-    </div>
 
-
-</section>
+    </section>
+    <article class="h-[160px] mb-[100px]"></article>
 
 {% endblock content %}
-
-
-
-
