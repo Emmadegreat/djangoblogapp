@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <section class="px-4 md:px-8 py-10 mt-[80px] mb-10 min-h-screen bg-white">
+    <section class="px-4 md:px-6 py-10 mt-[80px] mb-10 min-h-screen bg-white">
 
         <div class="mb-8 text-center">
             <a href="{% url 'users' %}" class="text-sm text-gray-400 hover:text-green-700 transition-colors duration-200">
@@ -15,7 +15,7 @@
             <hr class="mt-4" />
         </div>
 
-        <div class="max-w-2xl mx-auto border border-green-700 rounded-lg p-6 sm:p-8 shadow-sm">
+        <div class="max-w-[500px] mx-auto border border-green-700 rounded-lg p-6 sm:p-8 shadow-sm">
 
             <form class="space-y-5" method="POST" novalidate>
                 {% csrf_token %}
@@ -85,6 +85,6 @@
 
         </div>
 
-</section>
+    </section>
 
 {% endblock content %}

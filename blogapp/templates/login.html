@@ -42,7 +42,7 @@
 
                 <div class="mb-4">
                     <label for="id_password">Email</label>
-                    <input type="email" class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none"
+                    <input type="email" class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none focus:border-green-700"
                         name="email" placeholder="Email">
                         {% for error in form.email.errors %}
                             <p class="text-red-600">{{ error }}</p>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="id_password">Password</label>
-                    <input type="password" class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none"
+                    <input type="password" class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none focus:border-green-700"
                     name="password" placeholder="Password">
 
                     {% for error in form.password.errors  %}
