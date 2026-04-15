@@ -15,10 +15,12 @@ from django.contrib.auth.models import Group
 def dashboard(request):
     blog_count = Blogs.objects.all().count()
     category_count = Category.objects.all().count()
+    user_count = BlogUser.objects.all().count()
 
     context = {
         "blog_count": blog_count,
-        "category_count": category_count
+        "category_count": category_count,
+        "user_count": user_count
     }
     return render(request,'dashboard/dashboard.html', context)
 
