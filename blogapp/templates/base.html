@@ -132,28 +132,37 @@
         {%  endblock content %}
     </main>
 
-    <footer class="bg-[#1d3344] h-[120px] flex flex-col md:flex-row  items-center justify-between py-4 px-6 sm-8">
-
+    <footer class="bg-[#1d3344] flex flex-col items-center justify-center py-6 px-6 sm:px-8">
 
         <form id="subscription-form" data-url="{% url 'subscribe' %}">
             {% csrf_token %}
 
-            <div id="subscription-message" class="text-center"></div>
-            <div class="flex items-start">
+            <div id="subscription-message" class="text-center mb-2 min-h-[24px]"></div>
 
-                <input type="email" id="email" name="email" class="w-full max-w-[250px] focus:outline-none border-[1px] h-[40px] px-4"
+            <div class="flex items-center">
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="w-full max-w-[250px] focus:outline-none border-[1px] h-[40px] px-4 bg-white"
                     placeholder="Join Our Newsletter"
                     required
                 >
-                <button type="submit" class="bg-green-700 text-white border-[1px] border-white px-4 h-[40px] ml-[-5px]">
+                <button 
+                    type="submit" 
+                    class="bg-green-700 text-white px-4 h-[40px] whitespace-nowrap hover:bg-green-800 transition-colors duration-200">
                     Subscribe
                 </button>
             </div>
         </form>
 
+        <p class="text-gray-400 text-sm mt-4">&copy; <span id="date"></span> &nbsp;GistBlog. All rights reserved</p>
 
-        <p class="m-0 text-center text-white">&copy; GistBlog <span id="date"></span></p>
     </footer>
+
+
+        {% comment %} <p class="mt-4 gap-4 text-center text-white">&copy; <span id="date"></span> &nbsp;GistBlog. All rights reserved</p>
+    </footer> {% endcomment %}
 
         
     <script src="{% static 'js/app.js' %}"></script>

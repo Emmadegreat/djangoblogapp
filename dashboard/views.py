@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from blogapp.models import Blogs, Category, BlogUser
+from blogapp.models import Blogs, Category, BlogUser, ContactUs, NewsLetter
 from blogapp.decorator import allowed_users, admin_only
 from django.contrib.auth.decorators import login_required, user_passes_test
 from . form import AddCategoryForm, AddPostForm, AddUserForm
@@ -16,11 +16,15 @@ def dashboard(request):
     blog_count = Blogs.objects.all().count()
     category_count = Category.objects.all().count()
     user_count = BlogUser.objects.all().count()
+    contact_us_count = ContactUs.objects.all().count()
+    newsletter_count = NewsLetter.objects.all().count()
 
     context = {
         "blog_count": blog_count,
         "category_count": category_count,
-        "user_count": user_count
+        "user_count": user_count,
+        "contact_us_count": contact_us_count,
+        "newsletter_count": newsletter_count
     }
     return render(request,'dashboard/dashboard.html', context)
 

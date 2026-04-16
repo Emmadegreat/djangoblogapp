@@ -203,7 +203,7 @@ def subscribe(request):
 
                     send_mail( #send notification mail to the admin
                         'New mail re-subscription',
-                        f"The mail {mail} has re-subscribed to the newsletter",
+                        f"The mail {email} has re-subscribed to the newsletter",
                         settings.DEFAULT_FROM_EMAIL,
                         [settings.ADMIN_EMAIL],
                         fail_silently=False,

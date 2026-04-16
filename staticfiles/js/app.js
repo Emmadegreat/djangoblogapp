@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageContainer = document.getElementById('subscription-message');
 
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault();
 
-            const formData = new FormData(form); // Collect form data
-            const url = form.getAttribute('data-url'); // Get the URL from the form's data attribute
+            const formData = new FormData(form);
+            const url = form.getAttribute('data-url'); 
             const csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
             try {
@@ -37,19 +37,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
 
-                // Display success or error messages dynamically
                 if (response.ok) {
+
                     messageContainer.innerHTML = `<p style="color: green;">${data.message}</p>`;
                 } else {
+                    
                     messageContainer.innerHTML = `<p style="color: red;">${data.error}</p>`;
                 }
 
-                // Clear form input on success
+                setTimeout(() => {
+                    messageContainer.innerHTML = '';
+                }, 3000);
+        
                 if (data.success) {
                     form.reset();
                 }
             } catch (error) {
                 messageContainer.innerHTML = `<p style="color: red;">An error occurred. Please try again.</p>`;
+
+                setTimeout(() => {
+                    messageContainer.innerHTML = '';
+                }, 3000);
+                
                 console.error('Error:', error);
             }
         });

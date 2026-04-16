@@ -29,6 +29,7 @@
                     class="focus:outline-none border-[1px] border-gray-300 focus:border-green-700 h-[40px] px-4 rounded-l-md w-[220px] sm:w-[280px]" 
                     name="keyword" 
                     type="search" 
+                    value="{{ keyword }}"
                     placeholder="Search posts..." 
                 />
                 <button 
@@ -63,7 +64,7 @@
     {% endif %}
     <section class="px-[20px] md:px-[32px] flex flex-col">
 
-        <h3 class="text-[40px] font-semibold text-center pt-8 text-green-700">Featured Post</h3>
+        <h3 class="text-[28px] font-semibold text-center pt-8 text-green-700">Featured Post</h3>
         <hr>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-6">
@@ -80,9 +81,9 @@
                         <span>{{post.created_at}}</span>
                         <span class="text-[16px] italic">Author: {{post.author.first_name}}</span>
                     </div>
-                    <h2 class="card-title text-green-700 font-medium mt-2 text-[20px] py-2">{{post.title}}</h2>
-                    <p class="text-[18px] leading-6 mb-6">{{post.short_description | truncatewords:20}}</p>
-                    <a class="py-2 px-3 rounded-md border-[1px] border-green-700 mt-auto w-fit" href="{% url 'single_blog' slug=post.slug %}">Read more →</a>
+                    <h2 class="card-title text-green-700 font-medium mt-2 text-[18px] py-2">{{post.title}}</h2>
+                    <p class="text-[16px] leading-6 mb-6">{{post.short_description | truncatewords:20}}</p>
+                    <a class="text-[14px] py-2 px-3 rounded-md border-[1px] border-green-700 mt-auto w-fit" href="{% url 'single_blog' slug=post.slug %}">Read more →</a>
                 </div>
             </div>
 
@@ -93,7 +94,7 @@
     </section>
 
     <section class="px-[32px] flex flex-col mt-8">
-        <h3 class="text-[40px] font-semibold text-center pt-8 text-green-700">Recent Post</h3>
+        <h3 class="text-[28px] font-semibold text-center pt-8 text-green-700">Recent Post</h3>
         <hr>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
 
@@ -106,7 +107,7 @@
                             <span>{{recent_post.created_at}}</span>
                             <!--<span>{{recent_post.category}}</span>-->
                             <span style="float:right;"> Author:  {{recent_post.author.first_name}}</span></div>
-                            <h2 class="card-title text-green-700 font-medium mt-4 text-[20px] py-1">{{ recent_post.title }}</h2>
+                            <h2 class="card-title text-green-700 font-medium mt-4 text-[18px] py-1">{{ recent_post.title }}</h2>
                             <p class="text-[16px] leading-6 mb-4">{{recent_post.short_description | truncatewords:8}}</p>
                             <a class="text-green-700 text-[14px]" href="{% url 'single_blog' slug=recent_post.slug %}">Read more →</a>
                         </div>
