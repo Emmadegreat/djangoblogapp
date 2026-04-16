@@ -173,6 +173,11 @@ def contact_us_data_view(request):
     contact_data = ContactUs.objects.all()
     return render(request, 'dashboard/contact_us_data.html', {'contact_data': contact_data})
 
+@admin_only
+def newsletter_view(request):
+    newsletter_data = NewsLetter.objects.all()
+    return render(request, 'dashboard/newsletter.html', {'newsletter_data': newsletter_data})
+
 def not_allowed(request):
     return render(request, 'not_allowed.html')
 

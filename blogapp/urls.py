@@ -20,6 +20,7 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("contact_us/", views.contact_us_view, name="contact_us"),
     path("contact_us_data/", views.contact_us_data_view, name="contact_us_data"),
+    path('newsletter/', views.newsletter_view, name="newsletter"),
     path("not_allowed/", views.not_allowed, name="not_allowed"),
     path("subscribe/", views.subscribe, name="subscribe"),
     path("unsubscribe/", views.unsubscribe, name="unsubscribe"),
