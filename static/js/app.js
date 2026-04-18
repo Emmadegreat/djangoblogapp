@@ -10,7 +10,7 @@ function mapPreloader() {
 
         setTimeout(() => {
             loader.style.display = 'none';
-        }, 1500);
+        }, 500);
 
         hideLoader = true;
     }
@@ -116,5 +116,5 @@ const hamburger = document.getElementById('hamburger');
     });
 
 window.addEventListener('load', function(){
-    mapPreloader();
+    setTimeout(mapPreloader, 2000);
 })
