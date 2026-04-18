@@ -1,3 +1,22 @@
+let hideLoader = false;
+
+function mapPreloader() {
+    if (hideLoader) return;
+
+    const loader = document.getElementById("preloader");
+    if (loader) {
+        loader.style.opacity = '0';
+        loader.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 1500);
+
+        hideLoader = true;
+    }
+}
+
+
 document.getElementById("date").innerHTML = new Date().getFullYear();
 
 
@@ -95,3 +114,7 @@ const hamburger = document.getElementById('hamburger');
         mobileView.classList.remove('translate-x-0');
         overlay.classList.add('hidden');
     });
+
+window.addEventListener('load', function(){
+    mapPreloader();
+})

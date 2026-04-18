@@ -11,8 +11,16 @@
     {% block title %}{% endblock title %}
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
     <link href="{% static 'images/logo.png' %}" rel="icon" />
+    
 </head>
 <body>
+
+    <section class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white z-[999] transition-opacity duration-500 ease-out" id="preloader">
+        <div class="text-center" id="loader-content">
+            <div class="w-[50px] h-[50px] mx-auto mb-5 border-[5px] border-gray-200 border-t-[5px] border-t-green-700 rounded-full animate-spin" id="spinner"></div>
+        </div>
+    </section>
+
     <header class="w-full h-[60px] py-2 bg-white fixed top-0 left-0 sm:px-8 px-4 flex justify-between md:block z-50">
 
        <section class="flex items-center justify-between">
