@@ -178,6 +178,7 @@ def newsletter_view(request):
     newsletter_data = NewsLetter.objects.all()
     return render(request, 'dashboard/newsletter.html', {'newsletter_data': newsletter_data})
 
+
 def not_allowed(request):
     return render(request, 'not_allowed.html')
 
