@@ -116,5 +116,5 @@ const hamburger = document.getElementById('hamburger');
     });
 
 window.addEventListener('load', function(){
-    setTimeout(mapPreloader, 2000);
+    setTimeout(mapPreloader, 1500);
 })
