@@ -856,6 +856,10 @@ video {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -924,6 +928,10 @@ video {
   height: 40px;
 }
 
+.h-\[40vh\] {
+  height: 40vh;
+}
+
 .h-\[42px\] {
   height: 42px;
 }
@@ -946,10 +954,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-\[40vh\] {
-  height: 40vh;
 }
 
 .min-h-\[24px\] {
@@ -1349,12 +1353,12 @@ video {
   background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
 }
 
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
-}
-
 .bg-opacity-40 {
   --tw-bg-opacity: 0.4;
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 
 .object-cover {
@@ -1467,19 +1471,14 @@ video {
   padding-bottom: 2rem;
 }
 
-.py-\[30px\] {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-.py-\[20px\] {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 .py-\[10px\] {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.py-\[30px\] {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .pb-1 {
@@ -1603,6 +1602,10 @@ video {
   font-weight: 700;
 }
 
+.font-light {
+  font-weight: 300;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -1613,10 +1616,6 @@ video {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-light {
-  font-weight: 300;
 }
 
 .uppercase {
@@ -1794,11 +1793,6 @@ video {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* .forgot_password{
-    float: right;
-    text-align: right;
-} */
-
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -1917,15 +1911,6 @@ video {
     padding-bottom: 60px;
   }
 
-  .sm\:py-\[30px\] {
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-
-  .sm\:pt-\[20px\] {
-    padding-top: 20px;
-  }
-
   .sm\:pt-\[10px\] {
     padding-top: 10px;
   }
@@ -1964,24 +1949,16 @@ video {
     height: 240px;
   }
 
+  .md\:h-\[50vh\] {
+    height: 50vh;
+  }
+
   .md\:h-\[80px\] {
     height: 80px;
   }
 
   .md\:h-screen {
     height: 100vh;
-  }
-
-  .md\:h-\[50vh\] {
-    height: 50vh;
-  }
-
-  .md\:h-\[60vh\] {
-    height: 60vh;
-  }
-
-  .md\:h-\[70vh\] {
-    height: 70vh;
   }
 
   .md\:grid-cols-3 {
@@ -2006,17 +1983,17 @@ video {
     font-size: 14px;
   }
 
-  .md\:text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-
   .md\:text-\[20px\] {
     font-size: 20px;
   }
 
   .md\:text-\[48px\] {
     font-size: 48px;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
@@ -2025,3 +2002,4 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+

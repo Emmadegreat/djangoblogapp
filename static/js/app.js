@@ -98,23 +98,75 @@ function validateComment() {
 }
 
 const hamburger = document.getElementById('hamburger');
-    const mobileView = document.getElementById('mobile-view');
-    const overlay = document.getElementById('overlay');
+const mobileView = document.getElementById('mobile-view');
+const overlay = document.getElementById('overlay');
 
-    hamburger.addEventListener('click', () => {
-        
-        mobileView.classList.toggle('-translate-x-full');
-        mobileView.classList.toggle('translate-x-0');
-        overlay.classList.toggle('hidden');
-    });
-
+hamburger.addEventListener('click', () => {
     
-    overlay.addEventListener('click', () => {
-        mobileView.classList.add('-translate-x-full');
-        mobileView.classList.remove('translate-x-0');
-        overlay.classList.add('hidden');
-    });
+    mobileView.classList.toggle('-translate-x-full');
+    mobileView.classList.toggle('translate-x-0');
+    overlay.classList.toggle('hidden');
+});
+
+
+overlay.addEventListener('click', () => {
+    mobileView.classList.add('-translate-x-full');
+    mobileView.classList.remove('translate-x-0');
+    overlay.classList.add('hidden');
+});
 
 window.addEventListener('load', function(){
     setTimeout(mapPreloader, 1500);
-})
+});
+
+
+if (document.getElementById('quill-editor')) {
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link', 'image'],
+                [{ 'align': [] }],
+                ['blockquote', 'code-block'],
+                ['clean']
+            ]
+        }
+    });
+
+    var existingContent = document.getElementById('blog_body').value;
+    if (existingContent) {
+        quill.root.innerHTML = existingContent;
+    }
+
+    document.querySelector('form').addEventListener('submit', function() {
+        document.getElementById('blog_body').value = quill.root.innerHTML;
+    });
+}
+
+
+// var quill = new Quill('#quill-editor', {
+//     theme: 'snow',
+//     modules: {
+//         toolbar: [
+//             [{ 'header': [1, 2, 3, false] }],
+//             ['bold', 'italic', 'underline', 'strike'],
+//             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+//             ['link', 'image'],
+//             [{ 'align': [] }],
+//             ['blockquote', 'code-block'],
+//             ['clean']
+//         ]
+//     }
+// });
+
+// var existingContent = document.getElementById('blog_body').value;
+// if (existingContent) {
+//     quill.root.innerHTML = existingContent;
+// }
+
+// document.querySelector('form').addEventListener('submit', function() {
+//     document.getElementById('blog_body').value = quill.root.innerHTML;
+// });
