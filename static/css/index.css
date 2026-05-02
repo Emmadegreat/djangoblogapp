@@ -2,3 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer components {
+    .blog-content a {
+        color: #15803d;
+        text-decoration: underline;
+    }
+    .blog-content a:hover {
+        color: #166534;
+    }
+    .blog-content h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 1rem 0;
+    }
+    .blog-content h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1rem 0;
+    }
+    .blog-content h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0.75rem 0;
+    }
+    .blog-content p {
+        margin-bottom: 1rem;
+        line-height: 1.75;
+    }
+    .blog-content ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .blog-content ol {
+        list-style-type: decimal;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .blog-content blockquote {
+        border-left: 4px solid #15803d;
+        padding-left: 1rem;
+        color: #6b7280;
+        font-style: italic;
+        margin: 1rem 0;
+    }
+    .blog-content pre {
+        background: #f3f4f6;
+        padding: 1rem;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+    }
+}
