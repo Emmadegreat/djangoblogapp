@@ -30,9 +30,9 @@
                     <path d="M4 8H21.3333" stroke="#020202" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M4 24H16" stroke="#020202" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                </div>
-            <a href="{% url 'home' %}" class="block md:hidden"><img class="w-10 h-10" src="{% static 'images/logo.png' %}" alt="website logo"></a>
-       </section>
+            </div>
+            
+       </section><a href="{% url 'home' %}" class="block md:hidden"><img class="w-10 h-10" src="{% static 'images/logo.png' %}" alt="website logo"></a>
 
         <nav class="md:flex justify-between  items-center hidden">
             <a href="{% url 'home' %}" class="cursor-pointer"><img class="w-12 h-12" src="{% static 'images/logo.png' %}" alt="website logo"></a>
@@ -62,9 +62,9 @@
                         </a>
                     </button>
                 {% elif user.is_authenticated %}
-                    <small class="text-white text-[14px]">You are logged in as {{user.first_name}}</small>
+                    <small class="text-green-700 text-sm">You are logged in as {{user.first_name}}</small>
                     <button class="">
-                        <a class="text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-6 border-[1px] border-white" aria-current="page" href="{% url 'Logout' %}">
+                        <a class="bg-green-700 text-sm text-white hover:bg-white hover:text-green-700 rounded-md ml-4 py-2 px-4 border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
                             Logout
                         </a>
                     </button>
@@ -84,52 +84,52 @@
             </div>
 
         </nav>
-        <div class="md:hidden flex items-center">
-                            
-                {% if user.is_authenticated and user.is_staff %}
-
-                                    
-                    <button class="">
-                        <a class="bg-white py-2 px-2 rounded-md border-[1px] border-green-700 text-green-700 text-sm hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
-                            Dashboard
-                        </a>
-                    </button>
-                                    
-                    <button class="">
-                        <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md ml-3 py-2 px-2 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
-                            Logout
-                        </a>
-                    </button>
-                {% elif user.is_authenticated %}
-                    <small class="text-white text-[14px]">You are logged in as {{user.first_name}}</small>
-                    <button class="">
-                        <a class="text-white hover:bg-white hover:text-green-700 rounded-md ml-3 py-2 px-2 text-sm border-[1px] border-white" aria-current="page" href="{% url 'Logout' %}">
-                            Logout
-                        </a>
-                    </button>
-                {% else %}
-                    <button class="">
-                        <a class="text-white bg-green-700 hover:bg-white hover:text-green-700 rounded-md mx-2 py-2 px-3 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'login' %}">
-                            Login
-                        </a>
-                    </button>
-                    <button class="">
-                        <a class="bg-white py-2 px-2 rounded-md border-[1px] border-green-700 text-green-700 text-sm hover:text-white hover:bg-green-700" href="{% url 'register' %}">
-                            Register
-                        </a>
-                    </button>
-                {% endif %}
-
-        </div>
        
     </header>
 
     <aside class="mobile-view md:hidden fixed w-[75%] flex flex-col h-full bg-white top-[59px] pt-10 items-start z-40 transition-transform duration-500 ease-in-out -translate-x-full" id="mobile-view">
-        <ul class="flex items-center flex-col text-justify ml-2">
-            <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
-            <li class="mx-2 my-8"><a class="text-green-700 text-[20px] no-underline" href="{% url 'about' %}">About</a></li>
-            <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'contact_us' %}">Contact</a></li>
+        <ul class="flex items-start flex-col text-justify ml-6">
+            <li class=""><a class="text-green-700 text-sm no-underline" href="{% url 'home' %}">Home</a></li>
+            <li class="my-8"><a class="text-green-700 text-sm no-underline" href="{% url 'about' %}">About</a></li>
+            <li class=""><a class="text-green-700 text-sm no-underline" href="{% url 'contact_us' %}">Contact</a></li>
         </ul>
+
+        <div class="flex flex-col gap-6 mt-8 mx-6 items-start">
+                            
+            {% if user.is_authenticated and user.is_staff %}
+
+                                
+                <a class="bg-white py-2 px-2 rounded-md border-[1px] border-green-700 text-green-700 text-sm hover:text-white hover:bg-green-700" href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            
+                            
+                <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md py-2 mt-1 px-5 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
+                    Logout
+                </a>
+               
+            {% elif user.is_authenticated %}
+                <small class="text-green-700 text-sm">You are logged in as {{user.first_name}}</small>
+                
+                <a class="bg-green-700 text-white hover:bg-white hover:text-green-700 rounded-md py-2 mt-1 px-5 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'Logout' %}">
+                    Logout
+                </a>
+                
+            {% else %}
+               
+                <a class="text-white bg-green-700 hover:bg-white hover:text-green-700 rounded-md py-2 px-4 text-sm border-[1px] border-green-700" aria-current="page" href="{% url 'login' %}">
+                    Login
+                </a>
+            
+            
+                <a class="bg-white py-2 px-2 rounded-md border-[1px] border-green-700 text-green-700 text-sm hover:text-white hover:bg-green-700" href="{% url 'register' %}">
+                    Register
+                </a>
+               
+            {% endif %}
+
+        </div>
+        
 
     </aside>
     <div class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden" id="overlay"></div>
@@ -167,10 +167,6 @@
         <p class="text-gray-400 text-sm mt-4">&copy; <span id="date"></span> &nbsp;GistBlog. All rights reserved</p>
 
     </footer>
-
-
-        {% comment %} <p class="mt-4 gap-4 text-center text-white">&copy; <span id="date"></span> &nbsp;GistBlog. All rights reserved</p>
-    </footer> {% endcomment %}
 
         
     <script src="{% static 'js/app.js' %}"></script>
