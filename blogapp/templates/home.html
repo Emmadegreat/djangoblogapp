@@ -105,7 +105,7 @@
                     <div class="card-body p-4">
                         <div class="flex flex-col items-start my-4 italic text-gray-400">
                             <span>{{recent_post.created_at}}</span>
-                            <span style="float:right;"> Author:  {{recent_post.author.first_name}}</span>
+                            <span> Author:  {{recent_post.author.first_name}}</span>
                         </div>
                         <h2 class="card-title text-green-700 font-medium mt-4 text-[18px] py-1">{{ recent_post.title }}</h2>
                         <p class="text-[16px] leading-6 mb-4">{{recent_post.short_description | truncatewords:8}}</p>
