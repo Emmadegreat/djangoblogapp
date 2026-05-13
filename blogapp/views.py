@@ -12,12 +12,11 @@ import os
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail, send_mass_mail
 from . decorator import allowed_users, admin_only
-# Create your views here.
 
 def home(request):
     categories = Category.objects.all()
-    featured_post = Blogs.objects.filter(is_featured=True, status="published")#featured_post
-    posts = Blogs.objects.filter(is_featured=False, status="published")#unfeatured posts
+    featured_post = Blogs.objects.filter(is_featured=True, status="published")
+    posts = Blogs.objects.filter(is_featured=False, status="published")
 
 
     context = {
