@@ -8,7 +8,7 @@
 
         <article class="h-[120px] md:h-[160px]"></article>
 
-        <div class="rounded flex flex-col  mt-[48px] border-green-700 border-[1px] w-full  max-w-[500px] m-auto">
+        <div class="rounded flex flex-col  mt-[48px] border-green-700 border-[1px] w-full max-w-[500px] m-auto">
             <p class="text-center mt-4">Fill this form to get registered</p><hr>
 
             <form method="POST" novalidate action="" class="py-4 px-6">
@@ -18,7 +18,7 @@
                         <label for="id_firstname">First Name</label>
                         <input type="text" id="id_firstname" name="first_name"
                             class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none focus:border-green-700"
-                            placeholder="Uche">
+                            placeholder="John">
                         {% for error in form.first_name.errors %}
                             <p class="text-red-600">{{ error }}</p>
                         {% endfor %}
@@ -28,7 +28,7 @@
                         <label for="id_lastname">Last Name</label>
                         <input type="text" id="id_lastname" name="last_name"
                             class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none focus:border-green-700"
-                            placeholder="Okoro">
+                            placeholder="Doe">
                         {% for error in form.last_name.errors %}
                             <p class="text-red-600">{{ error }}</p>
                         {% endfor %}
@@ -38,7 +38,7 @@
                         <label for="id_email">Email</label>
                         <input type="email" id="id_email" name="email"
                             class="w-full h-[40px] rounded p-2 border-[1px] border-gray-400 focus:outline-none focus:border-green-700"
-                            placeholder="ucheokoro@gmail.com">
+                            placeholder="johndoe@gmail.com">
                         {% for error in form.email.errors %}
                             <p class="text-red-600">{{ error }}</p>
                         {% endfor %}
