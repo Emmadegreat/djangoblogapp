@@ -27,11 +27,11 @@
 
         {% endif %}
 
-        <div class="rounded flex flex-col  mt-[40px] gap-4 border-green-700 border-[1px] max-w-[500px] m-auto">
+        <div class="rounded flex flex-col  mt-[40px] gap-4 shadow-lg border-gray-100 border-[1px] max-w-[500px] m-auto">
             <div class="px-6 pt-6 pb-4 text-center border-b-[1px] border-gray-100">
-            <h2 class="text-[24px] font-semibold text-green-700">Welcome Back</h2>
-            <p class="text-gray-400 text-sm mt-1">Login to your GistBlog account</p>
-        </div>
+                <h2 class="text-[24px] font-semibold text-green-700">Welcome Back</h2>
+                <p class="text-gray-400 text-sm mt-1">Login to your GistBlog account</p>
+            </div>
             <form method = "POST" class="py-4 px-6" novalidate>
 
                 {% for error in form.non_field_errors %}
