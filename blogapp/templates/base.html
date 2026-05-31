@@ -7,10 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="emftech">
 
-
     {% block title %}{% endblock title %}
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
-    <link href="{% static 'images/logo.png' %}" rel="icon" />
+    <link href="{% static 'images/logo1.png' %}" rel="icon" />
     
 </head>
 <body>
@@ -21,7 +20,7 @@
         </div>
     </section>
 
-    <header class="w-full h-[60px] py-2 bg-white fixed top-0 left-0 sm:px-8 px-4 flex justify-between md:block z-50">
+    <header class="w-full h-[70px] py-2 bg-white fixed top-0 left-0 sm:px-8 px-4 flex justify-between md:block z-50">
 
        <section class="flex items-center justify-between">
             <div class="hamburger block md:hidden mr-3" id="hamburger">
@@ -32,10 +31,10 @@
                 </svg>
             </div>
             
-       </section><a href="{% url 'home' %}" class="block md:hidden"><img class="w-10 h-10" src="{% static 'images/logo.png' %}" alt="website logo"></a>
+       </section><a href="{% url 'home' %}" class="block md:hidden"><img class="w-[120px] h-[42px]" src="{% static 'images/logo3.png' %}" alt="website logo"></a>
 
         <nav class="md:flex justify-between  items-center hidden">
-            <a href="{% url 'home' %}" class="cursor-pointer"><img class="w-12 h-12" src="{% static 'images/logo.png' %}" alt="website logo"></a>
+            <a href="{% url 'home' %}" class="cursor-pointer flex items-center"><img class="w-[180px] h-[60px]" src="{% static 'images/logo3.png' %}" alt="website logo"></a>
             
             <ul class="flex items-center">
                 <li class="mx-2"><a class="text-green-700 text-[20px] no-underline" href="{% url 'home' %}">Home</a></li>
@@ -170,7 +169,7 @@
 
     <a href="https://wa.me/447563585427?text=Hello%20I%20would%20like%20to%20know%20more%20about%20GistBlog"
         target="_blank"
-        class="fixed bottom-20 left-6 z-50 bg-green-700 text-white p-2 rounded-full shadow-lg hover:bg-green-600">
+        class="fixed bottom-4 left-6 z-50 bg-green-700 text-white p-2 rounded-full shadow-lg hover:bg-green-600">
     
             <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
