@@ -33,7 +33,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 PORT = os.getenv('PORT', '8000')
 
-WHATSAPP_NUMBER = os.getenv('WHATSAPP_NUMBER')
+WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "").replace("+", "").replace(" ", "")
 
 
 # Application definition
