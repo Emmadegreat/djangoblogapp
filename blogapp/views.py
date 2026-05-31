@@ -12,6 +12,7 @@ import os
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail, send_mass_mail
 from . decorator import allowed_users, admin_only
+from django.conf import settings
 
 def home(request):
     categories = Category.objects.all()
@@ -294,79 +295,6 @@ def google_verification(request):
         return HttpResponse(file.read(), content_type="text/html")
 
 
-'''def social_auth(request):
-    FACEBOOK_APP_ID = os.environ.get("FACEBOOK_APP_ID")
-    FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET")
-    FACEBOOK_REDIRECT_URL = os.environ.get("FACEBOOK_REDIRECT_URL")
-    GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
-    GOOGLE_REDIRECT_URL = os.environ.get("GOOGLE_REDIRECT_URL")
-    GOOGLE_SECRET = os.environ.get("GOOGLE_SECRET")
-
-    context = {
-        "facebook_app_id":FACEBOOK_APP_ID,
-        "facebook_secret":FACEBOOK_SECRET,
-        "facebook_redirect":FACEBOOK_REDIRECT_URL,
-        "google_client_id":GOOGLE_CLIENT_ID,
-        "google_redirect_url":GOOGLE_REDIRECT_URL,
-        "google_secret":GOOGLE_SECRET,
-    }
-
-    return render(request, 'login.html', context)
-
-def facebook_signin(request):
-    code = request.GET.get("code")
-    appId= os.environ.get('FACEBOOK_APP_ID')
-    appSecret = os.environ.get('FACEBOOK_SECRET')
-    redirect_uri = os.environ.get('FACEBOOK_REDIRECT_URL')
-    http_headers = {
-        'Content-Type': 'application/json',
-    }
-    url = f'https://graph.facebook.com/v19.0/oauth/access_token?client_id={appId}&redirect_uri={redirect_uri}&client_secret={appSecret}&code={code}'
-    resp = requests.get(url,headers=http_headers)
-    data = resp.json()
-    access_token = data['access_token']
-
-    #get user id with access token
-    url = f'https://graph.facebook.com/me?access_token={access_token}'
-    resp = requests.get(url,headers=http_headers)
-    data = resp.json()
-    id = data['id']
-
-    #get user details with id and access token
-    url = f'https://graph.facebook.com/{id}?fields=id,name,email,picture&access_token={access_token}'
-    resp = requests.get(url,headers=http_headers)
-    data = resp.json()
-
-    id = data['id']
-    name = data['name']
-    firstname, lastname = name.split(' ', 1)
-    email = data['email']
-    picture = data['picture']['data']['url']
-    user, created = BlogUser.objects.get_or_create(email=email, username=email, defaults={'first_name': firstname, 'last_name': lastname})
-    login(request, user)
-    return redirect("/")
-
-
-def google_signin(request):
-    access_token = request.GET.get("access_token")
-    if access_token:
-        headers1 = {
-        'Content-Type': 'application/json',
-        'Connection': 'Keep-Alive',
-        'Authorization': f'Bearer {access_token}',
-        }
-        url='https://people.googleapis.com/v1/people/me?personFields=emailAddresses,names,photos'
-        resp = requests.get(url,headers=headers1)
-        data = resp.json()
-        status_code = resp.status_code
-        if status_code <400:
-            familyName = data['names'][0]['familyName']
-            givenName = data['names'][0]['givenName']
-            email = data['emailAddresses'][0]['value']
-            photo = data['photos'][0]['url']
-            user, created = User.objects.get_or_create(email=email, username=email, defaults={'first_name': familyName, 'last_name': givenName})
-            login(request, user)
-            return redirect("/")
-        else:
-            return HttpResponse("error")
-    return render(request, 'google.html')'''
+context = {
+    'whatsapp_number': settings.WHATSAPP_NUMBER
+}

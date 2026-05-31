@@ -33,6 +33,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 PORT = os.getenv('PORT', '8000')
 
+WHATSAPP_NUMBER = os.getenv('WHATSAPP_NUMBER')
+
 
 # Application definition
 
@@ -87,6 +89,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'blogapp.context_processors.get_categories',
+                'blogapp.context_processors.get_whatsapp_number',
             ],
         },
     },
