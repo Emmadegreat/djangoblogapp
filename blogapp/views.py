@@ -12,7 +12,7 @@ import os
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail, send_mass_mail
 from . decorator import allowed_users, admin_only
-from django.conf import settings
+
 
 def home(request):
     categories = Category.objects.all()
@@ -293,8 +293,3 @@ def google_verification(request):
     file_path = os.path.join(settings.STATIC_ROOT, "google1fc99727dbd27deb.html")
     with open(file_path, "r") as file:
         return HttpResponse(file.read(), content_type="text/html")
-
-
-context = {
-    'whatsapp_number': settings.WHATSAPP_NUMBER
-}

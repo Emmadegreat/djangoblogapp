@@ -1457,6 +1457,10 @@ video {
   --tw-bg-opacity: 0.5;
 }
 
+.fill-white {
+  fill: #fff;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
