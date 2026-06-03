@@ -696,12 +696,20 @@ video {
   inset: 0px;
 }
 
+.bottom-4 {
+  bottom: 1rem;
+}
+
 .bottom-6 {
   bottom: 1.5rem;
 }
 
 .left-0 {
   left: 0px;
+}
+
+.left-6 {
+  left: 1.5rem;
 }
 
 .right-3 {
@@ -726,18 +734,6 @@ video {
 
 .top-\[70px\] {
   top: 70px;
-}
-
-.bottom-20 {
-  bottom: 5rem;
-}
-
-.left-6 {
-  left: 1.5rem;
-}
-
-.bottom-4 {
-  bottom: 1rem;
 }
 
 .z-30 {
@@ -928,10 +924,6 @@ video {
   margin-top: auto;
 }
 
-.mt-0 {
-  margin-top: 0px;
-}
-
 .block {
   display: block;
 }
@@ -972,8 +964,8 @@ video {
   height: 2.5rem;
 }
 
-.h-12 {
-  height: 3rem;
+.h-14 {
+  height: 3.5rem;
 }
 
 .h-4 {
@@ -1028,6 +1020,10 @@ video {
   height: 60vh;
 }
 
+.h-\[70px\] {
+  height: 70px;
+}
+
 .h-\[80px\] {
   height: 80px;
 }
@@ -1036,24 +1032,8 @@ video {
   height: 100%;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
-.h-20 {
-  height: 5rem;
-}
-
-.h-14 {
-  height: 3.5rem;
-}
-
-.h-\[70px\] {
-  height: 70px;
-}
-
-.h-\[46px\] {
-  height: 46px;
+.h-\[90px\] {
+  height: 90px;
 }
 
 .min-h-\[24px\] {
@@ -1064,12 +1044,8 @@ video {
   min-height: 100vh;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-12 {
-  width: 3rem;
+.w-14 {
+  width: 3.5rem;
 }
 
 .w-4 {
@@ -1082,6 +1058,14 @@ video {
 
 .w-\[100\%\] {
   width: 100%;
+}
+
+.w-\[120px\] {
+  width: 120px;
+}
+
+.w-\[180px\] {
+  width: 180px;
 }
 
 .w-\[220px\] {
@@ -1103,54 +1087,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-16 {
-  width: 4rem;
-}
-
-.w-20 {
-  width: 5rem;
-}
-
-.w-14 {
-  width: 3.5rem;
-}
-
-.w-\[200px\] {
-  width: 200px;
-}
-
-.w-\[100px\] {
-  width: 100px;
-}
-
-.w-\[120px\] {
-  width: 120px;
-}
-
-.w-\[124px\] {
-  width: 124px;
-}
-
-.w-\[160px\] {
-  width: 160px;
-}
-
-.w-\[132px\] {
-  width: 132px;
-}
-
-.w-\[128px\] {
-  width: 128px;
-}
-
-.w-\[180px\] {
-  width: 180px;
-}
-
-.w-\[60px\] {
-  width: 60px;
 }
 
 .min-w-full {
@@ -1391,6 +1327,10 @@ video {
   border-top-width: 5px;
 }
 
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-gray-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity, 1));
@@ -1494,11 +1434,6 @@ video {
 .bg-yellow-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-40 {
@@ -1677,10 +1612,6 @@ video {
   padding-top: 160px;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -1752,18 +1683,6 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.text-\[36px\] {
-  font-size: 36px;
-}
-
-.text-\[42px\] {
-  font-size: 42px;
-}
-
-.text-\[428px\] {
-  font-size: 428px;
 }
 
 .font-bold {
@@ -1887,11 +1806,6 @@ video {
   color: rgb(202 138 4 / var(--tw-text-opacity, 1));
 }
 
-.text-red-700 {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
-}
-
 .no-underline {
   text-decoration-line: none;
 }
@@ -1902,6 +1816,12 @@ video {
 
 .opacity-0 {
   opacity: 0;
+}
+
+.shadow-\[0_4px_6px_-2px_rgba\(0\2c 0\2c 0\2c 0\.1\)\] {
+  --tw-shadow: 0 4px 6px -2px rgba(0,0,0,0.1);
+  --tw-shadow-colored: 0 4px 6px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-lg {
@@ -1993,6 +1913,11 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-green-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-green-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
@@ -2016,11 +1941,6 @@ video {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.hover\:bg-green-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-gray-900:hover {
@@ -2161,14 +2081,6 @@ video {
 
   .md\:flex-row {
     flex-direction: row;
-  }
-
-  .md\:items-center {
-    align-items: center;
-  }
-
-  .md\:justify-between {
-    justify-content: space-between;
   }
 
   .md\:px-6 {
