@@ -23,7 +23,7 @@ STATUS_CHOICES=[
 ]
 
 class AddPostForm(forms.ModelForm):
-    title = forms.CharField(label='title', max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    title = forms.CharField(label='title', max_length=70, widget=forms.TextInput(attrs={'class':'form-control'}))
     category = forms.ModelChoiceField(label='category', queryset=Category.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
     blog_image = forms.ImageField(label='blog_image')
     short_description = forms.CharField(label='short_description', widget=forms.Textarea())
