@@ -48,8 +48,8 @@ class BlogUser(AbstractUser):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=20, unique=True)
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.category_name
@@ -74,8 +74,8 @@ class Blogs(models.Model):
     blog_body = models.TextField(max_length=3000)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
     is_featured = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     # this ensures automatic slug and url generation for blog post
     def get_absolute_url(self):
@@ -94,14 +94,21 @@ class Comment(models.Model):
     author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Blogs, on_delete=models.CASCADE)
     comment = models.TextField(max_length=3000, blank=False)
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
     class Meta:
         verbose_name_plural = 'comments'
+        ordering = ['-created_at']
 
-        def __str__(self):
-            return self.comment_body
+    def __str__(self):
+            # return self.comment_body
+            return f"{self.author.email}: {self.comment[:40]}"
+
+    @property
+    def is_edited(self):
+        return (self.updated_at - self.created_at).total_seconds() > 60
 
 
 class ContactUs(models.Model):

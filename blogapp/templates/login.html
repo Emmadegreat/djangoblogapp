@@ -7,7 +7,7 @@
     <section class="mt-[40px] md:px-6 px-4">
         <article class="h-[90px] md:h-[160px]"></article>
 
-        {% if messages %}
+        {% comment %} {% if messages %}
 
             {% for message in messages %}
                 <div class="tgap-2 ext-[16px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2 {% if message.tags == 'success' %} bg-green-700 text-white
@@ -25,7 +25,7 @@
 
             {% endfor %}
 
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <div class="rounded flex flex-col  mt-[40px] gap-4 shadow-lg border-gray-100 border-[1px] max-w-[500px] m-auto">
             <div class="px-6 pt-6 pb-4 text-center border-b-[1px] border-gray-100">
@@ -39,6 +39,7 @@
                 {% endfor %}
 
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
 
                 <div class="mb-4">
                     <label for="id_password">Email</label>

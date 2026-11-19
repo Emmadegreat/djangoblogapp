@@ -14,6 +14,8 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("category/<int:category_id>/", views.post_by_category, name="post_by_category"),
     path("posts/<slug:slug>/", views.single_blog, name="single_blog"), #note the posts before /<slug:slug> has nothing to do with our model or view
+    path("comments/<int:comment_id>/edit/", views.edit_comment, name="edit_comment"),
+    path("comments/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"),
     path("blogs/search/", views.search, name="search"),
     path("register/", views.register, name="register"),
     path("Logout/", views.Logout, name="Logout"),
@@ -40,7 +42,6 @@ urlpatterns = [
     path('password-reset-done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
          name='password_reset_done'),
 
-    # path("social_auth", views.social_auth, name="social_auth"),
-    # path("facebook", views.facebook_signin, name="facebook"),
-    # path("google", views.google_signin, name="google"),
+    path("comments/<int:comment_id>/reply/", views.reply_comment, name="reply_comment"),
+
 ]

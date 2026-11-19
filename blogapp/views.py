@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from . models import Blogs, Category, BlogUser, Comment, ContactUs, NewsLetter
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.contrib.auth import authenticate, login as auth_login, logout
 from blogapp.form import RegisterForm, LoginForm, ContactUsForm, SubscribeForm, UnSubscribeForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -12,6 +12,11 @@ import os
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail, send_mass_mail
 from . decorator import allowed_users, admin_only
+from datetime import timedelta
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.http import require_POST
 
 
 def home(request):
@@ -49,27 +54,143 @@ def post_by_category(request, category_id):
     }
     return render(request, "post_by_category.html", context)
 
+
+
+COMMENT_MAX_LENGTH = 1000
+COMMENT_COOLDOWN_SECONDS = 20
+
 def single_blog(request, slug):
     blog_details = get_object_or_404(Blogs, slug=slug, status="published")
 
     if request.method == 'POST':
-        comment = Comment()
-        comment.author = request.user
-        comment.post = blog_details
-        comment.comment = request.POST['comment']
-        comment.save()
-        return HttpResponseRedirect(request.path_info)
+        if not request.user.is_authenticated:
+            messages.error(request, "Please log in to comment.")
+            return redirect(f"{reverse('login')}?next={request.path}%23comments")
 
-    comments = Comment.objects.filter(post= blog_details)
-    comment_count = comments.count()
+        text = request.POST.get('comment', '').strip()
+
+        if not text:
+            messages.error(request, "Please write a comment before submitting.")
+        elif len(text) > COMMENT_MAX_LENGTH:
+            messages.error(request, f"Comments can be at most {COMMENT_MAX_LENGTH} characters.")
+        else:
+            too_soon = Comment.objects.filter(
+                author=request.user,
+                created_at__gte=timezone.now() - timedelta(seconds=COMMENT_COOLDOWN_SECONDS),
+            ).exists()
+            duplicate = Comment.objects.filter(
+                author=request.user, post=blog_details, comment=text
+            ).exists()
+
+            if too_soon:
+                messages.error(request, "You're commenting too fast. Please wait a few seconds.")
+            elif duplicate:
+                messages.info(request, "You've already posted this comment.")
+            else:
+                Comment.objects.create(author=request.user, post=blog_details, comment=text)
+                messages.success(request, "Your comment has been posted.")
+
+        return HttpResponseRedirect(f"{request.path}#comments")
+
+    comments = (
+        Comment.objects.filter(post=blog_details, parent__isnull=True)
+        .select_related('author')
+        .prefetch_related(Prefetch(
+            'replies',
+            queryset=Comment.objects.select_related('author').order_by('created_at'),
+        ))
+    )
     context = {
         "blog_details": blog_details,
         "comments": comments,
-        "comment_count": comment_count
+        "comment_count": Comment.objects.filter(post=blog_details).count(),
     }
-
-
     return render(request, "single_blog_page.html", context)
+
+
+
+def _login_redirect(request, comment):
+    messages.error(request, "Please log in first.")
+    return redirect(f"{reverse('login')}?next={comment.post.get_absolute_url()}%23comments")
+
+
+@require_POST
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    post_url = f"{comment.post.get_absolute_url()}#comments"
+
+    if not request.user.is_authenticated:
+        return _login_redirect(request, comment)
+
+    if comment.author_id != request.user.id:          # only the author may edit
+        messages.error(request, "You can only edit your own comments.")
+        return HttpResponseRedirect(post_url)
+
+    text = request.POST.get('comment', '').strip()
+    if not text:
+        messages.error(request, "A comment can't be empty.")
+    elif len(text) > COMMENT_MAX_LENGTH:
+        messages.error(request, f"Comments can be at most {COMMENT_MAX_LENGTH} characters.")
+    elif text == comment.comment:
+        messages.info(request, "No changes were made.")
+    else:
+        comment.comment = text
+        comment.save()
+        messages.success(request, "Your comment has been updated.")
+    return HttpResponseRedirect(post_url)
+
+
+@require_POST
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    post_url = f"{comment.post.get_absolute_url()}#comments"
+
+    if not request.user.is_authenticated:
+        return _login_redirect(request, comment)
+
+    if comment.author_id != request.user.id and not request.user.is_staff:
+        messages.error(request, "You can't delete this comment.")
+        return HttpResponseRedirect(post_url)
+
+    comment.delete()
+    messages.success(request, "Comment deleted.")
+    return HttpResponseRedirect(post_url)
+
+
+
+@require_POST
+def reply_comment(request, comment_id):
+    target = get_object_or_404(Comment, pk=comment_id)
+    top = target.parent or target                      # keep replies one level deep
+    post_url = top.post.get_absolute_url()
+
+    if not request.user.is_authenticated:
+        return _login_redirect(request, top)
+
+    text = request.POST.get('comment', '').strip()
+    if not text:
+        messages.error(request, "A reply can't be empty.")
+    elif len(text) > COMMENT_MAX_LENGTH:
+        messages.error(request, f"Replies can be at most {COMMENT_MAX_LENGTH} characters.")
+    else:
+        too_soon = Comment.objects.filter(
+            author=request.user,
+            created_at__gte=timezone.now() - timedelta(seconds=COMMENT_COOLDOWN_SECONDS),
+        ).exists()
+        duplicate = Comment.objects.filter(
+            author=request.user, post=top.post, comment=text
+        ).exists()
+
+        if too_soon:
+            messages.error(request, "You're commenting too fast. Please wait a few seconds.")
+        elif duplicate:
+            messages.info(request, "You've already posted this.")
+        else:
+            Comment.objects.create(author=request.user, post=top.post, parent=top, comment=text)
+            messages.success(request, "Your reply has been posted.")
+
+    return HttpResponseRedirect(f"{post_url}#comment-{top.id}")
+
 
 
 def search(request):
@@ -113,10 +234,38 @@ def Logout(request):
     return redirect('login')
 
 
-def login(request):
-    if request.user.is_authenticated:
-        return redirect('home')
+# def login(request):
+#     if request.user.is_authenticated:
+#         return redirect('home')
 
+
+#     form = LoginForm()
+#     if request.method == 'POST':
+#         form = LoginForm(request.POST)
+
+#         if form.is_valid():
+#             email = form.cleaned_data.get('email')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(request, email=email, password=password)
+
+#             if user is not None:
+#                 auth_login(request, user)
+#                 messages.success(request, f"You have been logged in as {user.first_name}")
+#                 return redirect('home')
+
+#     return render(request, 'login.html', {'form': form})
+
+
+
+def login(request):
+    next_url = request.POST.get('next') or request.GET.get('next') or ''
+    if not url_has_allowed_host_and_scheme(
+        next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+    ):
+        next_url = ''          # ignore unsafe redirects to other sites
+
+    if request.user.is_authenticated:
+        return redirect(next_url or 'home')
 
     form = LoginForm()
     if request.method == 'POST':
@@ -130,9 +279,11 @@ def login(request):
             if user is not None:
                 auth_login(request, user)
                 messages.success(request, f"You have been logged in as {user.first_name}")
-                return redirect('home')
+                return redirect(next_url or 'home')
 
-    return render(request, 'login.html', {'form': form})
+            messages.error(request, "Invalid email or password.")
+
+    return render(request, 'login.html', {'form': form, 'next': next_url})
 
 
 def contact_us_view(request):

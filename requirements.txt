@@ -5,6 +5,9 @@ charset-normalizer==3.4.7
 cloudinary==1.44.1
 cryptography==46.0.6
 Django==4.2.29
+django-browser-reload==1.21.0
+django-ckeditor==6.7.3
+django-js-asset==2.2.0
 django-widget-tweaks==1.5.1
 git-filter-repo==2.47.0
 gunicorn==23.0.0

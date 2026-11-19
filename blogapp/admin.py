@@ -33,14 +33,18 @@ class BlogAdmin(admin.ModelAdmin):
     search_fields = ('id', 'title', 'status', 'category__category_name')
     list_editable = ('is_featured',)
 
-# class CommentAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'comment_body', 'author', 'post', 'created_at', 'updated_at')
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'short_comment', 'author', 'post', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('comment', 'author__email', 'post__title')
+
+    def short_comment(self, obj):
+        return obj.comment[:60]
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Blogs, BlogAdmin)
 admin.site.register(BlogUser, BlogUserAdmin)
-admin.site.register(Comment)
 admin.site.register(ContactUs)
 admin.site.register(NewsLetter)
-## my user/password: Admin/Admin123.
+admin.site.register(Comment, CommentAdmin),
