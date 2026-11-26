@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from blogapp.models import Blogs, Category, BlogUser, ContactUs, NewsLetter
 from blogapp.decorator import allowed_users, admin_only
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -80,14 +81,19 @@ def edit_category(request,pk):
     return render(request,'dashboard/edit_category.html', {'form': form})
 
 
+@require_POST
 @login_required(login_url='/login')
 @allowed_users(allowed_roles=['editors'])
-def delete_category(request,pk):
-
-    category = Category.objects.get(pk=pk)
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    name = category.category_name
+    post_count = category.blogs_set.count()
     category.delete()
 
-    messages.error(request, 'category deleted')
+    if post_count:
+        messages.success(request, f"Category {name} and its {post_count} post(s) were deleted.")
+    else:
+        messages.success(request, f"Category {name} was deleted.")
     return redirect('categories')
 
 
@@ -140,13 +146,16 @@ def edit_post(request,pk):
 
     return render(request,'dashboard/edit_post.html', {'form': form})
 
+
+@require_POST
 @login_required(login_url='/login')
 @allowed_users(allowed_roles=['editors'])
-def delete_post(request,pk):
-    posts = Blogs.objects.get(pk=pk)
-    posts.delete()
+def delete_post(request, pk):
+    post = get_object_or_404(Blogs, pk=pk)
+    title = post.title
+    post.delete()
 
-    messages.error(request, 'Woops! post deleted')
+    messages.success(request, f"Post '{title}' was deleted.")
     return redirect('posts')
 
 
@@ -200,11 +209,18 @@ def edit_user(request,pk):
     return render(request, 'dashboard/edit_user.html', {'form':form})
 
 
+
+@require_POST
 @login_required(login_url='/login')
 @user_passes_test(lambda user: user.is_superuser, login_url="/login")
-def delete_user(request,pk):
-    user = BlogUser.objects.get(pk=pk)
-    user.delete()
+def delete_user(request, pk):
+    user_to_delete = get_object_or_404(BlogUser, pk=pk)
 
-    messages.error(request, 'Woops! you have deleted a user')
+    if user_to_delete.pk == request.user.pk:
+        messages.error(request, "You can't delete your own account.")
+    else:
+        email = user_to_delete.email
+        user_to_delete.delete()
+        messages.success(request, f"User {email} has been deleted.")
+
     return redirect('users')

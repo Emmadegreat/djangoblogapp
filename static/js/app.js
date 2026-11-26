@@ -29,9 +29,9 @@ function closeMessage(id) {
     }
 }
 
-const confirmDelete = () => {
-    return confirm("Are you sure you want to delete this?");
-}
+// const confirmDelete = () => {
+//     return confirm("Are you sure you want to delete this?");
+// }
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -99,7 +99,7 @@ document.addEventListener('click', function (e) {
         document.getElementById('deleteCancel').focus();
         return;
     }
-    // close on Cancel, or when clicking the dark backdrop
+    
     if (e.target.closest('#deleteCancel') || e.target === modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
@@ -208,6 +208,118 @@ document.addEventListener('submit', function (e) {
     if (btn) {
         btn.disabled = true;
         btn.textContent = 'Posting...';
+    }
+});
+
+
+document.addEventListener('click', function (e) {
+    var modal = document.getElementById('deleteUserModal');
+    if (!modal) return;
+
+    var btn = e.target.closest('.delete-user-btn');
+    if (btn) {
+        document.getElementById('deleteUserForm').action = btn.dataset.deleteUrl;
+        document.getElementById('deleteUserLabel').textContent = btn.dataset.deleteLabel;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('deleteUserCancel').focus();
+        return;
+    }
+    if (e.target.closest('#deleteUserCancel') || e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+document.addEventListener('keydown', function (e) {
+    var modal = document.getElementById('deleteUserModal');
+    if (e.key === 'Escape' && modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+
+document.addEventListener('submit', function (e) {
+    if (e.target.id === 'deleteUserForm') {
+        var b = document.getElementById('deleteUserSubmit');
+        b.disabled = true;
+        b.textContent = 'Deleting...';
+    }
+});
+
+
+
+
+document.addEventListener('click', function (e) {
+    var modal = document.getElementById('deleteCategoryModal');
+    if (!modal) return;
+
+    var btn = e.target.closest('.delete-category-btn');
+    if (btn) {
+        document.getElementById('deleteCategoryForm').action = btn.dataset.deleteUrl;
+        document.getElementById('deleteCategoryLabel').textContent = btn.dataset.deleteLabel;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('deleteCategoryCancel').focus();
+        return;
+    }
+    if (e.target.closest('#deleteCategoryCancel') || e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+document.addEventListener('keydown', function (e) {
+    var modal = document.getElementById('deleteCategoryModal');
+    if (e.key === 'Escape' && modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+document.addEventListener('submit', function (e) {
+    if (e.target.id === 'deleteCategoryForm') {
+        var b = document.getElementById('deleteCategorySubmit');
+        b.disabled = true;
+        b.textContent = 'Deleting...';
+    }
+});
+
+
+
+document.addEventListener('click', function (e) {
+    var modal = document.getElementById('deletePostModal');
+    if (!modal) return;
+
+    var btn = e.target.closest('.delete-post-btn');
+    if (btn) {
+        document.getElementById('deletePostForm').action = btn.dataset.deleteUrl;
+        document.getElementById('deletePostLabel').textContent = btn.dataset.deleteLabel;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('deletePostCancel').focus();
+        return;
+    }
+    if (e.target.closest('#deletePostCancel') || e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+document.addEventListener('keydown', function (e) {
+    var modal = document.getElementById('deletePostModal');
+    if (e.key === 'Escape' && modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+});
+
+document.addEventListener('submit', function (e) {
+    if (e.target.id === 'deletePostForm') {
+        var b = document.getElementById('deletePostSubmit');
+        b.disabled = true;
+        b.textContent = 'Deleting...';
     }
 });
 

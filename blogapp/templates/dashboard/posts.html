@@ -5,28 +5,6 @@
 {% block content %}
     <section class="px-4 sm:px-6 py-10 mt-[80px] mb-10 min-h-screen">
 
-        {% if messages %}
-            <div class="fixed top-[70px] left-0 w-full z-50 px-4 flex flex-col gap-2">
-                {% for message in messages %}
-                    <div class="text-[15px] relative flex items-center justify-center rounded-md w-full h-10 text-center p-2
-                        {% if message.tags == 'success' %} bg-green-700 text-white
-                        {% elif message.tags == 'danger' %} bg-red-500 text-white
-                        {% elif message.tags == 'warning' %} bg-yellow-400 text-black
-                        {% elif message.tags == 'info' %} bg-blue-400 text-black
-                        {% else %} bg-gray-400 text-black {% endif %}"
-                        id="message-{{ forloop.counter }}">
-                        {{ message }}
-
-                        <button
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-[22px] text-gray-200 hover:text-white"
-                            onclick="closeMessage('message-{{ forloop.counter }}')">
-                            &times;
-                        </button>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-
         <div class="mb-8">
             <h1 class="text-[24px] font-semibold text-green-700">Posts</h1>
             <hr class="mt-2" />
@@ -87,11 +65,12 @@
                                             Edit
                                         </a>
 
-                                        <a href="{% url 'delete_post' post.id %}"
-                                            onclick="return confirmDelete();"
-                                            class="w-full sm:w-auto text-center px-3 py-1 text-white text-sm bg-red-600 rounded hover:bg-red-800 transition-colors duration-200">
-                                            Delete
-                                        </a>
+                                        <button type="button"
+                                            data-delete-url="{% url 'delete_post' post.id %}"
+                                            data-delete-label="{{ post.title }}"
+                                            class="delete-post-btn w-full sm:w-auto text-center px-3 py-1 text-white text-sm bg-red-600 rounded hover:bg-red-800 transition-colors duration-200">
+                                                Delete
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -107,5 +86,63 @@
         <article class="h-[80px] mb-[100px]"></article>
 
     </section>
+
+
+
+    <div id="deletePostModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4"
+        role="dialog" aria-modal="true" aria-labelledby="deletePostTitle">
+        <div class="w-full max-w-sm rounded-md bg-white p-6 shadow-xl">
+            <h3 id="deletePostTitle" class="text-lg font-semibold text-gray-800">Delete this post?</h3>
+            <p class="mt-2 text-sm text-gray-500">
+                You are about to delete <span id="deletePostLabel" class="font-medium text-gray-700"></span>.
+                All its comments will be deleted too. This can't be undone.
+            </p>
+            <form id="deletePostForm" method="POST" class="mt-5 flex justify-end gap-2">
+                {% csrf_token %}
+                <button type="button" id="deletePostCancel"
+                        class="rounded-md border border-gray-300 px-4 h-[38px] text-sm text-gray-600 hover:bg-gray-100">Cancel</button>
+                <button type="submit" id="deletePostSubmit"
+                        class="rounded-md bg-red-600 px-4 h-[38px] text-sm text-white hover:bg-red-700 disabled:opacity-60">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            var modal = document.getElementById('deletePostModal');
+            if (!modal) return;
+
+            var btn = e.target.closest('.delete-post-btn');
+            if (btn) {
+                document.getElementById('deletePostForm').action = btn.dataset.deleteUrl;
+                document.getElementById('deletePostLabel').textContent = btn.dataset.deleteLabel;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.getElementById('deletePostCancel').focus();
+                return;
+            }
+            if (e.target.closest('#deletePostCancel') || e.target === modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            var modal = document.getElementById('deletePostModal');
+            if (e.key === 'Escape' && modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        });
+
+        document.addEventListener('submit', function (e) {
+            if (e.target.id === 'deletePostForm') {
+                var b = document.getElementById('deletePostSubmit');
+                b.disabled = true;
+                b.textContent = 'Deleting...';
+            }
+        });
+    </script>
+
 
 {% endblock content %}

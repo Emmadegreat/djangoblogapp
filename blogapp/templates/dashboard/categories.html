@@ -5,17 +5,6 @@
 {% block content %}
 
     <section class="px-4 sm:px-6 py-10 mt-[80px] mb-10">
-        {% if messages %}
-
-                {% for message in messages %}
-                    <div {% if message.tags %} class="alert alert-{{ message.tags}}" {% endif %}>
-                        {{ message }}
-                    </div>
-
-                {% endfor %}
-
-
-            {% endif %}
 
         <div class="mb-8">
             <h1 class="text-[24px] font-semibold text-green-700">Categories</h1>
@@ -53,18 +42,18 @@
                                 <td class="px-4 py-3 text-sm text-gray-600">{{ forloop.counter }}</td>
                                 <td class="px-4 py-3 text-sm text-gray-600">{{ category.category_name }}</td>
                                 <td class="px-4 py-3 text-sm text-gray-600">{{ category.created_at }}</td>
-                                <td class="px-4 py-3 text-sm text-gray-600">{{ category.created_at }}</td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center gap-2">
                                         <a href="{% url 'edit_category' category.id %}" 
                                         class="px-3 py-1 text-white text-sm bg-orange-400 rounded hover:bg-orange-600 transition-colors duration-200">
                                             Edit
                                         </a>
-                                        <a href="{% url 'delete_category' category.id %}" 
-                                        onclick="return confirmDelete();"
-                                        class="px-3 py-1 text-white text-sm bg-red-600 rounded hover:bg-red-800 transition-colors duration-200">
-                                            Delete
-                                        </a>
+                                        <button type="button"
+                                            data-delete-url="{% url 'delete_category' category.id %}"
+                                            data-delete-label="{{ category.category_name }}"
+                                            class="delete-category-btn px-3 py-1 text-white text-sm bg-red-600 rounded hover:bg-red-800 transition-colors duration-200">
+                                                Delete
+                                        </button>
                                     </div>
                                 </td>
 
@@ -80,5 +69,25 @@
         <article class="h-[80px] mb-[100px]"></article>
 
     </section>
+
+
+    <div id="deleteCategoryModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4"
+        role="dialog" aria-modal="true" aria-labelledby="deleteCategoryTitle">
+        <div class="w-full max-w-sm rounded-md bg-white p-6 shadow-xl">
+            <h3 id="deleteCategoryTitle" class="text-lg font-semibold text-gray-800">Delete this category?</h3>
+            <p class="mt-2 text-sm text-gray-500">
+                You are about to delete <span id="deleteCategoryLabel" class="font-medium text-gray-700"></span>.
+                <span class="font-medium text-red-600">All blog posts in this category will be deleted too.</span>
+                This can't be undone.
+            </p>
+            <form id="deleteCategoryForm" method="POST" class="mt-5 flex justify-end gap-2">
+                {% csrf_token %}
+                <button type="button" id="deleteCategoryCancel"
+                        class="rounded-md border border-gray-300 px-4 h-[38px] text-sm text-gray-600 hover:bg-gray-100">Cancel</button>
+                <button type="submit" id="deleteCategorySubmit"
+                        class="rounded-md bg-red-600 px-4 h-[38px] text-sm text-white hover:bg-red-700 disabled:opacity-60">Delete</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock content %}
