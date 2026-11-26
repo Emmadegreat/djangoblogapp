@@ -53,7 +53,7 @@ def add_category(request):
         if form.is_valid():
             form.save()
             category_name = form.cleaned_data['category_name']
-            messages.success(request, f'you have added {category_name} as a new category')
+            messages.success(request, f'You have added {category_name} as a new category')
             return redirect('categories')
 
     else:
@@ -137,7 +137,7 @@ def edit_post(request,pk):
             form.save()
 
             title = form.cleaned_data['title']
-            messages.success(request, f"post with title {title} has been updated")
+            messages.success(request, f"Post with title {title} has been updated")
             return redirect('posts')
 
     edit_posts = Blogs.objects.get(pk=pk)

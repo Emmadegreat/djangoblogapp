@@ -29,10 +29,6 @@ function closeMessage(id) {
     }
 }
 
-// const confirmDelete = () => {
-//     return confirm("Are you sure you want to delete this?");
-// }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('subscription-form');
@@ -292,19 +288,19 @@ document.addEventListener('click', function (e) {
     var modal = document.getElementById('deletePostModal');
     if (!modal) return;
 
-    var btn = e.target.closest('.delete-post-btn');
-    if (btn) {
-        document.getElementById('deletePostForm').action = btn.dataset.deleteUrl;
-        document.getElementById('deletePostLabel').textContent = btn.dataset.deleteLabel;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.getElementById('deletePostCancel').focus();
-        return;
-    }
-    if (e.target.closest('#deletePostCancel') || e.target === modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
+        var btn = e.target.closest('.delete-post-btn');
+        if (btn) {
+            document.getElementById('deletePostForm').action = btn.dataset.deleteUrl;
+            document.getElementById('deletePostLabel').textContent = btn.dataset.deleteLabel;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('deletePostCancel').focus();
+            return;
+        }
+        if (e.target.closest('#deletePostCancel') || e.target === modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
 });
 
 document.addEventListener('keydown', function (e) {
@@ -322,7 +318,7 @@ document.addEventListener('submit', function (e) {
         b.textContent = 'Deleting...';
     }
 });
-
+    
 
 
 

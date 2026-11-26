@@ -87,14 +87,12 @@
 
     </section>
 
-
-
     <div id="deletePostModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4"
         role="dialog" aria-modal="true" aria-labelledby="deletePostTitle">
         <div class="w-full max-w-sm rounded-md bg-white p-6 shadow-xl">
             <h3 id="deletePostTitle" class="text-lg font-semibold text-gray-800">Delete this post?</h3>
             <p class="mt-2 text-sm text-gray-500">
-                You are about to delete <span id="deletePostLabel" class="font-medium text-gray-700"></span>.
+                You are about to delete the post "<span id="deletePostLabel" class="font-medium text-gray-700"></span>".
                 All its comments will be deleted too. This can't be undone.
             </p>
             <form id="deletePostForm" method="POST" class="mt-5 flex justify-end gap-2">
@@ -107,42 +105,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('click', function (e) {
-            var modal = document.getElementById('deletePostModal');
-            if (!modal) return;
-
-            var btn = e.target.closest('.delete-post-btn');
-            if (btn) {
-                document.getElementById('deletePostForm').action = btn.dataset.deleteUrl;
-                document.getElementById('deletePostLabel').textContent = btn.dataset.deleteLabel;
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.getElementById('deletePostCancel').focus();
-                return;
-            }
-            if (e.target.closest('#deletePostCancel') || e.target === modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        });
-
-        document.addEventListener('keydown', function (e) {
-            var modal = document.getElementById('deletePostModal');
-            if (e.key === 'Escape' && modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        });
-
-        document.addEventListener('submit', function (e) {
-            if (e.target.id === 'deletePostForm') {
-                var b = document.getElementById('deletePostSubmit');
-                b.disabled = true;
-                b.textContent = 'Deleting...';
-            }
-        });
-    </script>
-
+    
 
 {% endblock content %}
