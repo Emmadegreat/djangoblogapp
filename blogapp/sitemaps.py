@@ -3,6 +3,7 @@ from .models import Blogs
 from django.urls import reverse
 
 class BlogSitemap(Sitemap):
+    protocol = "https"
     changefreq = "daily"
     priority = 0.8
 
@@ -17,6 +18,7 @@ class BlogSitemap(Sitemap):
 
 #this ensures that static pages are optimized with SEO
 class StaticPagesSitemap(Sitemap):
+    protocol = "https"
     changefred = "monthly"
     priority = 0.5
 
