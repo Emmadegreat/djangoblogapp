@@ -422,13 +422,6 @@ def unsubscribe(request):
     return render(request, 'subscribe.html', {'form': form})
 
 
-def page_not_found(request, exception):
-
-    return render(request, '404.html', status=404) #trying to access a page that is not existing in the website
-
-def server_error(request, exception):
-
-    return render(request, '500.html', status=500)# server error like wrong configuration of data/details
 
 def bad_request(request, exception):
 
@@ -437,6 +430,14 @@ def bad_request(request, exception):
 def permission_denied(request, exception): #permission like login related error
 
     return render(request, '403.html', status=403)
+
+def page_not_found(request, exception):
+
+    return render(request, '404.html', status=404) #trying to access a page that is not existing in the website
+
+def server_error(request):
+
+    return render(request, '500.html', status=500)# server error like wrong configuration of data/details
 
 
 #Google verification route for google console and ranking
